@@ -1,0 +1,10 @@
+/* #body {
+  background-color: rgb(46, 71, 109);
+} */
+#row .card {
+  cursor: pointer;
+}
+#row .card:hover {
+  background: #b8b6c4;
+  color: white;
+}
