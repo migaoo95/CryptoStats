@@ -8,3 +8,8 @@
   background: #b8b6c4;
   color: white;
 }
+#cryptoContainer {
+  padding-top: 30px;
+  max-height: 50vh;
+  overflow: auto;
+}

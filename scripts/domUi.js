@@ -1,14 +1,26 @@
 class DomUI {
   constructor() {
-    this.row = document.getElementById("row");
+    this.leaderBoard = document.getElementById("row");
+    this.gainers = document.getElementById("gainersTable");
+    this.losers = document.getElementById("losersTable");
   }
+
+  // Calculate Price Movement precentages
   static calcPrecentage(currency) {
     const resultPrecentage =
       Math.round(currency.price_change_percentage_24h * 100) / 100;
   }
-  createElemet(currency) {
-    console.log(Math.round(currency.price_change_percentage_24h * 100) / 100);
-    this.row.innerHTML += `
+  // Update leaderboard
+  refresh() {
+    this.leaderBoard.innerHTML = "";
+  }
+
+  // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
+  createLeaderBoard(currency) {
+    // console.log(Math.round(currency.price_change_percentage_24h * 100) / 100);
+    const coinCapitalized =
+      currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
+    this.leaderBoard.innerHTML += `
     <div class="col-lg-3 col-md-6 mb-5">
     <div class="card">
       <div class="card-body text-center">
@@ -17,29 +29,55 @@ class DomUI {
           alt=""
           class="img-fluid rounded-circle w-50 mb-3"
         />
-        <h5>${currency.id}</h5>
-        <h5 class="">${
+        <h6>${coinCapitalized}</h6>
+        <h6 class="">${
           currency.current_price
-        } <span class="text-success">$</span></h5>
-        <h5><span>1h: </span> <span class="${
+        } <span class="text-success">$</span></h6>
+        <h6><span>24h: </span> <span class="${
           currency.price_change_percentage_24h >= 0
             ? "text-success"
             : "text-danger"
         }">${
       Math.round(currency.price_change_percentage_24h * 100) / 100
-    }%</span></h5>
-        <h5><span>24h: </span> <span class="${
-          currency.price_change_percentage_24h >= 0
-            ? "text-success"
-            : "text-danger"
-        }">${
-      Math.round(currency.price_change_percentage_24h * 100) / 100
-    }%</span></h5>
+    }%</span></h6>
+        
       
         </div>
       </div>
     </div>
   </div>
+    `;
+  }
+  // Display loosers Table ---------------------------------- { Loosers }
+  displayLoosers(crypto) {
+    this.losers.innerHTML += `
+    <tr>
+  
+    <td><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+      crypto.image
+    }">${crypto.id} <span class="text-muted">${crypto.symbol}</span></td>
+    <td><span class="${
+      crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
+    }">${
+      Math.round(crypto.price_change_percentage_24h * 100) / 100
+    }%</span></td>
+    </tr>
+    `;
+  }
+  // Display gainers Table ---------------------------------- { Gainers }
+  displayGainers(crypto) {
+    this.gainers.innerHTML += `
+    <tr>
+
+    <td><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+      crypto.image
+    }">${crypto.id} <span class="text-muted">${crypto.symbol}</span></td>
+    <td><span class="${
+      crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
+    }">${
+      Math.round(crypto.price_change_percentage_24h * 100) / 100
+    }%</span></td>
+    </tr>
     `;
   }
 }

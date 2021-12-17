@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
 <link rel="stylesheet" href="styles/style.css">
-    <title>Bootstrap Sandbox</title>
+    <title>Crypto Stats</title>
   </head>
   <div class="container-fluid">
     <div  class="row flex-nowrap">
@@ -34,23 +34,59 @@
                     
             </div>
         </div>
-        <!-- LATEST CRYPTO PRICES -->
+        <!-- Main Container -->
         <div id="body" class="col py-3">
+            <!-- GAINERS -->
+            <div class="container"> <div class="row mb-4">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="d-flex align-items-center card-header"><i style="vertical-align: middle;" class="text-success pr-3 fas fa-chart-line fa-2x"></i><h6 class="pt-2">Biggest Gainers</h6></div>
+                        <div class="card-body p-1">
+                            <table class="table table-borderless">
+                                <tbody id="gainersTable"></tbody>
+                            </table>
+                        </div></div>
+                    </div>
+                    
+                    <!-- LOOSERS -->
+                <div class="col-6">
+                    <div class="card">
+                        <div class="d-flex align-items-center card-header"> <i style="vertical-align: middle;" class="text-danger pr-3 fas fa-skull-crossbones fa-2x"></i><h6 class="pt-2">Biggest Losers</h6></div>
+                        <div class="card-body p-1">
+                            <table class="table table-borderless">
+                                <tbody id="losersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+            </div></div>
+            <!-- CRYPTO CURRENCY LEADERBOARD -->
                 <div class="container">
-                  <div class="row">
+                    <div class="card">
+                  <div class="row ">
                     <div class="col text-center">
+                        
                       <div class="info-header mb-5">
-                        <h1 class="text-primary pb-3">Leadning Crypto Currencies</h1>
+                          <div class="card-header">
+                        <h1 class="text-primary pb-3"> Crypto Currency Leaderboard</h1>
                         <p class="lead">
-                    Latest information about Top 10 Crypto Currencies by Market Capitalization 
+                    Latest information about Top <select class="" name="" id="ranking">
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> Crypto Currencies by Market Capitalization 
                         </p>
+                    </div>
                       </div>
                     </div>
                   </div>
+                  <div class="overflow-scroll card-body" id="cryptoContainer">
                   <div id="row" class="row">
-                    
+                
                 </div>
-             
+            </div>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -59,7 +95,7 @@
 <script src="scripts/apiData.js"></script>
 <script src="scripts/application.js"></script>
 <!-- CDNS -->
-<script src="https://use.fontawesome.com/19233f79fc.js"></script>
+<script src="https://kit.fontawesome.com/29d490a53c.js" crossorigin="anonymous"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
