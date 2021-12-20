@@ -20,9 +20,10 @@ marketApi.getData().then((data) => {
     domUi.displayGainers(coin);
   });
   //   LEADERBOARD
-  data.marketDataJson.forEach((currency) => {
+  data.marketDataJson.forEach((currency, index) => {
     // console.log(currency);
-    domUi.createLeaderBoard(currency);
+    // console.log(index);
+    domUi.createLeaderBoard(currency, index);
   });
 });
 // Change amount of coins displaied within Leaderboard -------------------------- { Event }
@@ -30,9 +31,9 @@ document.getElementById("ranking").addEventListener("change", (e) => {
   marketApi.changeRanking(e.target.value);
   domUi.refresh();
   marketApi.getData().then((data) => {
-    data.marketDataJson.forEach((currency) => {
+    data.marketDataJson.forEach((currency, index) => {
       //   console.log(currency);
-      domUi.createLeaderBoard(currency);
+      domUi.createLeaderBoard(currency, index);
     });
   });
 });

@@ -16,19 +16,24 @@ class DomUI {
   }
 
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
-  createLeaderBoard(currency) {
+  createLeaderBoard(currency, index) {
     // console.log(Math.round(currency.price_change_percentage_24h * 100) / 100);
     const coinCapitalized =
       currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
     this.leaderBoard.innerHTML += `
     <div class="col-lg-3 col-md-6 mb-5">
     <div class="card">
+   <div class="d-flex justify-content-between position-absolute w-100">
+    <h6 class="  m-1 p-1">${index + 1}</h6>
+    <i style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 p-1 text-muted"></i>
+    </div>
       <div class="card-body text-center">
         <img style="margin-top: -50px"
           src="${currency.image}"
           alt=""
           class="img-fluid rounded-circle w-50 mb-3"
         />
+       
         <h6>${coinCapitalized}</h6>
         <h6 class="">${
           currency.current_price

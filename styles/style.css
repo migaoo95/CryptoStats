@@ -13,3 +13,6 @@
   max-height: 50vh;
   overflow: auto;
 }
+.star:hover {
+  color: gold !important;
+}
