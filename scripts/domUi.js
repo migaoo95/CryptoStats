@@ -3,6 +3,7 @@ class DomUI {
     this.leaderBoard = document.getElementById("row");
     this.gainers = document.getElementById("gainersTable");
     this.losers = document.getElementById("losersTable");
+    this.modalTable = document.querySelector("#modalTable");
   }
 
   // Calculate Price Movement precentages
@@ -114,5 +115,26 @@ class DomUI {
     }%</span></td>
     </tr>
     `;
+  }
+  // Display in Modal ---------------------------------- { Modal }
+  displayInModal(crypto, indexItem) {
+    this.modalTable.innerHTML += `
+    <tr>
+
+    <td><span class="mr-3 text-muted">${
+      indexItem + 1
+    }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+      crypto.image
+    }">${
+      crypto.id
+    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
+    <td><span class="${
+      crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
+    }">${
+      Math.round(crypto.price_change_percentage_24h * 100) / 100
+    }%</span></td>
+    </tr>
+    `;
+    // console.log(sortCoinss);
   }
 }

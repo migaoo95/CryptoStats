@@ -57,3 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
   //   const leaderBoardTokens = document.querySelectorAll("#leaderCard");
   //   console.log(leaderBoardTokens);
 });
+// MODAL  ------------------------------- { Event Modal}
+document.querySelectorAll("#linkMore").forEach((link) => {
+  link.addEventListener("click", () => {
+    marketApi.getData().then((data) => {
+      const sortCoinss = data.marketDataJsonAll.sort((a, b) => {
+        return a.price_change_percentage_24h - b.price_change_percentage_24h;
+      });
+      const slicedArray = sortCoinss.slice(0, 50);
+      slicedArray.forEach((coin, index) => {
+        domUi.displayInModal(coin, index);
+      });
+    });
+  });
+});
