@@ -14,12 +14,12 @@ marketApi.getData().then((data) => {
   const slicedArray = sortCoins.slice(0, 3);
   const newSliced = sortCoins.slice(-3).reverse();
   // GAINERS
-  slicedArray.forEach((coin) => {
-    domUi.displayLoosers(coin);
+  slicedArray.forEach((coin, index) => {
+    domUi.displayLoosers(coin, index);
   });
   //   LOOSERS
-  newSliced.forEach((coin) => {
-    domUi.displayGainers(coin);
+  newSliced.forEach((coin, index) => {
+    domUi.displayGainers(coin, index);
   });
   // ForEach data recived call UI method -------------------------- { LeaderBoard }
   data.marketDataJson.forEach((currency, index) => {

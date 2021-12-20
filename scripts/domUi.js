@@ -76,13 +76,17 @@ class DomUI {
     `;
   }
   // Display loosers Table ---------------------------------- { Loosers }
-  displayLoosers(crypto) {
+  displayLoosers(crypto, indexItem) {
     this.losers.innerHTML += `
     <tr>
   
-    <td><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+    <td><span class="mr-3 text-muted">${
+      indexItem + 1
+    }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
       crypto.image
-    }">${crypto.id} <span class="text-muted">${crypto.symbol}</span></td>
+    }">${
+      crypto.id
+    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
     <td><span class="${
       crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
     }">${
@@ -92,13 +96,17 @@ class DomUI {
     `;
   }
   // Display gainers Table ---------------------------------- { Gainers }
-  displayGainers(crypto) {
+  displayGainers(crypto, indexItem) {
     this.gainers.innerHTML += `
     <tr>
 
-    <td><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+    <td><span class="mr-3 text-muted">${
+      indexItem + 1
+    }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
       crypto.image
-    }">${crypto.id} <span class="text-muted">${crypto.symbol}</span></td>
+    }">${
+      crypto.id
+    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
     <td><span class="${
       crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
     }">${

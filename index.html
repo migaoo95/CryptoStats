@@ -40,18 +40,42 @@
             <div class="container"> <div class="row mb-4">
                 <div class="col-6">
                     <div class="card">
-                        <div class="d-flex align-items-center card-header"><i style="vertical-align: middle;" class="text-success pr-3 fas fa-chart-line fa-2x"></i><h6 class="pt-2">Biggest Gainers</h6></div>
+                        <div class="d-flex align-items-center card-header">
+                            <i style="vertical-align: middle;" class="text-success pr-3 fas fa-chart-line fa-2x"></i>
+                            <!-- MODAL SWITCH %%% -->
+                            <h6 class="pt-2">Biggest Gainers</h6><a data-toggle="modal"
+                            data-target="#myModal" id="linkMore" class="ml-auto text-primary" href="#">more <i class="fas fa-arrow-circle-right"></i></a></div>
                         <div class="card-body p-1">
                             <table class="table table-borderless">
                                 <tbody id="gainersTable"></tbody>
                             </table>
                         </div></div>
                     </div>
-                    
+                    <!-- MODAL -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Modal Title</h5>
+                              <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal Content -->
+                            <div class="modal-body">
+                         
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     <!-- LOOSERS -->
                 <div class="col-6">
                     <div class="card">
-                        <div class="d-flex align-items-center card-header"> <i style="vertical-align: middle;" class="text-danger pr-3 fas fa-skull-crossbones fa-2x"></i><h6 class="pt-2">Biggest Losers</h6></div>
+                        <div class="d-flex align-items-center card-header"> <i style="vertical-align: middle;" class="text-danger pr-3 fas fa-skull-crossbones fa-2x"></i><h6 class="pt-2">Biggest Losers</h6><a data-toggle="modal"
+                            data-target="#myModal" id="linkMore" class="ml-auto text-primary" href="#">more <i class="fas fa-arrow-circle-right"></i></a></div>
                         <div class="card-body p-1">
                             <table class="table table-borderless">
                                 <tbody id="losersTable"></tbody>
