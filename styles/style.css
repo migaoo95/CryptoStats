@@ -2,7 +2,7 @@
   background-color: rgb(46, 71, 109);
 } */
 #row .card {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 #row .card:hover {
   background: #b8b6c4;
@@ -14,5 +14,9 @@
   overflow: auto;
 }
 .star:hover {
+  cursor: pointer;
+  color: gold !important;
+}
+.starActive {
   color: gold !important;
 }

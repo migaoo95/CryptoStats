@@ -14,18 +14,40 @@ class DomUI {
   refresh() {
     this.leaderBoard.innerHTML = "";
   }
-
+  //   ---------------------------------- { WatchList }
+  watchList(target) {
+    if (target.classList.contains("starActive")) {
+      target.classList.remove("starActive");
+    } else {
+      target.classList.add("starActive");
+    }
+  }
+  watchListClasses(allTokens) {
+    console.log(allTokens);
+  }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
-    // console.log(Math.round(currency.price_change_percentage_24h * 100) / 100);
+    // Assign Class Name -------- { ClassName }
+    const store = new Store();
+    let tokenClass;
+    const storedCoins = storage.getStoredData();
+    const lowerCasedCoins = storedCoins.map((coin) => {
+      return coin.toLowerCase();
+    });
+    if (lowerCasedCoins.includes(currency.id)) {
+      tokenClass = "starActive";
+    } else {
+      tokenClass = "";
+    }
+    // DOM Output -------- { Output }
     const coinCapitalized =
       currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
     this.leaderBoard.innerHTML += `
-    <div class="col-lg-3 col-md-6 mb-5">
+    <div id="leaderCard" class="col-lg-3 col-md-6 mb-5">
     <div class="card">
    <div class="d-flex justify-content-between position-absolute w-100">
     <h6 class="  m-1 p-1">${index + 1}</h6>
-    <i style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 p-1 text-muted"></i>
+    <i style="vertical-align: middle; font-size:20px;" class="${tokenClass} star far fa-star mt-1 p-1 text-muted"></i>
     </div>
       <div class="card-body text-center">
         <img style="margin-top: -50px"
