@@ -3,13 +3,8 @@ class DomUI {
     this.leaderBoard = document.getElementById("row");
     this.gainers = document.getElementById("gainersTable");
     this.losers = document.getElementById("losersTable");
+    this.modalHeader = document.querySelector(".modal-header");
     this.modalTable = document.querySelector("#modalTable");
-  }
-
-  // Calculate Price Movement precentages
-  static calcPrecentage(currency) {
-    const resultPrecentage =
-      Math.round(currency.price_change_percentage_24h * 100) / 100;
   }
   // Update leaderboard
   refresh() {
@@ -117,7 +112,23 @@ class DomUI {
     `;
   }
   // Display in Modal ---------------------------------- { Modal }
-  displayInModal(crypto, indexItem) {
+  refreshModal() {
+    this.modalTable.innerHTML = "";
+    this.modalHeader.innerHTML = "";
+  }
+  changeHeader(test) {
+    if (test) {
+      this.modalHeader.innerHTML = `
+      <i style="vertical-align: middle;" class=" pr-3 text-danger fas fa-skull-crossbones fa-2x"></i>
+      <h6 class="pr-5 modal-title">Biggest Loosers</h6>`;
+    } else {
+      this.modalHeader.innerHTML = `
+      <i style="vertical-align: middle;" class=" pr-3 text-success fas fa-chart-line fa-2x"></i>
+      <h6 class="pr-5 modal-title">Biggest Gainers</h6>`;
+    }
+  }
+  // Display in Modal ---------------------------------- { Modal }
+  displayInModal(crypto, indexItem, gainers, losers) {
     this.modalTable.innerHTML += `
     <tr>
 

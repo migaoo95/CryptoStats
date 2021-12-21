@@ -4,15 +4,26 @@ const marketApi = new ApiData();
 const domUi = new DomUI();
 // Init LocalStorage Class
 const storage = new Store();
-// Get Api object on load ------------------------- { Promise }
-marketApi.getData().then((data) => {
-  // Sort descending cryptocurrencies by price action -------------------------- { Sort }
-  const sortCoins = data.marketDataJsonAll.sort((a, b) => {
+
+// Sort Price Change Precentage DESC  ------------------------------- { Helper Function }
+function sortDataLow(arr) {
+  const sortCoinss = arr.sort((a, b) => {
     return a.price_change_percentage_24h - b.price_change_percentage_24h;
   });
-
-  const slicedArray = sortCoins.slice(0, 3);
-  const newSliced = sortCoins.slice(-3).reverse();
+  return sortCoinss;
+}
+// Sort Price Change Precentage ASC  ------------------------------- { Helper Function  }
+function sortDataGrow(arr) {
+  const sortCoinss = arr.sort((a, b) => {
+    return b.price_change_percentage_24h - a.price_change_percentage_24h;
+  });
+  return sortCoinss;
+}
+// Get Api object on load ------------------------- { Promise }
+marketApi.getData().then((data) => {
+  //   Sort Gainers and Losers Data and Display in the DOM ------------------------- { Gainers / Losers }
+  const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 3);
+  const newSliced = sortDataLow(data.marketDataJsonAll).slice(-3).reverse();
   // GAINERS
   slicedArray.forEach((coin, index) => {
     domUi.displayLoosers(coin, index);
@@ -23,10 +34,7 @@ marketApi.getData().then((data) => {
   });
   // ForEach data recived call UI method -------------------------- { LeaderBoard }
   data.marketDataJson.forEach((currency, index) => {
-    // console.log(storedCoins);
     domUi.createLeaderBoard(currency, index);
-    // const leaderBoardTokens = document.querySelectorAll("#leaderCard");
-    // domUi.watchListClasses(leaderBoardTokens);
   });
 });
 // Change amount of coins displaied within Leaderboard -------------------------- { Change LeaderBoard }
@@ -35,7 +43,6 @@ document.getElementById("ranking").addEventListener("change", (e) => {
   domUi.refresh();
   marketApi.getData().then((data) => {
     data.marketDataJson.forEach((currency, index) => {
-      //   console.log(currency);
       domUi.createLeaderBoard(currency, index);
     });
   });
@@ -47,27 +54,34 @@ document.getElementById("row").addEventListener("click", (e) => {
       e.target.parentElement.nextElementSibling.childNodes[3].textContent
     );
     domUi.watchList(e.target.parentElement.children[1]);
-    // console.log(
-    //   e.target.parentElement.nextElementSibling.childNodes[3].textContent
-    // );
   }
 });
-// Display what is already being watched -------------------------- { OnContentLoad WatchList }
-document.addEventListener("DOMContentLoaded", () => {
-  //   const leaderBoardTokens = document.querySelectorAll("#leaderCard");
-  //   console.log(leaderBoardTokens);
-});
-// MODAL  ------------------------------- { Event Modal}
+// MODAL  ------------------------------- { Event Modal }
 document.querySelectorAll("#linkMore").forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (e) => {
+    let headers;
+    if (e.target.classList.contains("lLink")) {
+      headers = true;
+    } else {
+      headers = false;
+    }
+
+    domUi.refreshModal();
+    domUi.changeHeader(headers);
     marketApi.getData().then((data) => {
-      const sortCoinss = data.marketDataJsonAll.sort((a, b) => {
-        return a.price_change_percentage_24h - b.price_change_percentage_24h;
-      });
-      const slicedArray = sortCoinss.slice(0, 50);
-      slicedArray.forEach((coin, index) => {
-        domUi.displayInModal(coin, index);
-      });
+      if (e.target.classList.contains("lLink")) {
+        const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 50);
+        slicedArray.forEach((coin, index) => {
+          if (coin.price_change_percentage_24h < 0) {
+            domUi.displayInModal(coin, index, false, true);
+          }
+        });
+      } else {
+        const slicedArray = sortDataGrow(data.marketDataJsonAll).slice(0, 50);
+        slicedArray.forEach((coin, index) => {
+          domUi.displayInModal(coin, index, true, false);
+        });
+      }
     });
   });
 });
