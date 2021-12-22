@@ -20,23 +20,35 @@ function sortDataGrow(arr) {
   return sortCoinss;
 }
 // Get Api object on load ------------------------- { Promise }
-marketApi.getData().then((data) => {
-  //   Sort Gainers and Losers Data and Display in the DOM ------------------------- { Gainers / Losers }
-  const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 3);
-  const newSliced = sortDataLow(data.marketDataJsonAll).slice(-3).reverse();
-  // GAINERS
-  slicedArray.forEach((coin, index) => {
-    domUi.displayLoosers(coin, index);
+marketApi
+  .getData()
+  .then((data) => {
+    // ---------------------------------- { Construction } ----------------------------- ???????
+
+    // ---------------------------------- { Construction } ----------------------------- ???????
+    console.log(data.marketDataJson);
+    //   Sort Gainers and Losers Data and Display in the DOM ------------------------- { Gainers / Losers }
+    const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 3);
+    const newSliced = sortDataLow(data.marketDataJsonAll).slice(-3).reverse();
+    // GAINERS
+    slicedArray.forEach((coin, index) => {
+      domUi.displayLoosers(coin, index);
+    });
+    //   LOOSERS
+    newSliced.forEach((coin, index) => {
+      domUi.displayGainers(coin, index);
+    });
+
+    // ForEach data recived call UI method -------------------------- { LeaderBoard }
+    data.marketDataJson.forEach((currency, index) => {
+      domUi.createLeaderBoard(currency, index);
+    });
+    return data;
+  })
+  .then((data) => {
+    // console.log(data.marketDataJson);
+    domUi.generateCharts(data.marketDataJson);
   });
-  //   LOOSERS
-  newSliced.forEach((coin, index) => {
-    domUi.displayGainers(coin, index);
-  });
-  // ForEach data recived call UI method -------------------------- { LeaderBoard }
-  data.marketDataJson.forEach((currency, index) => {
-    domUi.createLeaderBoard(currency, index);
-  });
-});
 // Change amount of coins displaied within Leaderboard -------------------------- { Change LeaderBoard }
 document.getElementById("ranking").addEventListener("change", (e) => {
   marketApi.changeRanking(e.target.value);

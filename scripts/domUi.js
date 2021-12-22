@@ -18,6 +18,7 @@ class DomUI {
       target.classList.add("starActive");
     }
   }
+  // Check THis -------------------------- { CHECK }  -------
   watchListClasses(allTokens) {
     console.log(allTokens);
   }
@@ -38,6 +39,7 @@ class DomUI {
     // DOM Output -------- { Output }
     const coinCapitalized =
       currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
+
     this.leaderBoard.innerHTML += `
     <div id="leaderCard" class="col-lg-3 col-md-6 mb-5">
     <div class="card">
@@ -63,14 +65,141 @@ class DomUI {
         }">${
       Math.round(currency.price_change_percentage_24h * 100) / 100
     }%</span></h6>
-        
+         <h6><span>7d: </span> <span class="${
+           currency.price_change_percentage_7d_in_currency >= 0
+             ? "text-success"
+             : "text-danger"
+         }">${
+      Math.round(currency.price_change_percentage_7d_in_currency * 100) / 100
+    }%</span></h6>
+
+      <canvas class="canvases" id="myChart${index}"></canvas>
       
         </div>
       </div>
     </div>
   </div>
     `;
+    // this.generateCharts(index);
   }
+  generateCharts(data) {
+    const canvases = document.querySelectorAll(".canvases");
+    console.log("Data", data);
+    canvases.forEach((canvas, index) => {
+      const ctx = document.getElementById(`myChart${index}`).getContext("2d");
+      const myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: data[index].sparkline_in_7d.price,
+          datasets: [
+            {
+              label: "# of Votes",
+              data: data[index].sparkline_in_7d.price,
+              backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+              borderColor: ["rgba(255, 99, 132, 1)"],
+              borderWidth: 0.5,
+            },
+          ],
+        },
+        options: {
+          elements: {
+            point: {
+              radius: 0,
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              // Hide grid Lines y axis
+              display: false,
+            },
+            // Hide grid Lines x axis
+            x: {
+              display: false,
+            },
+          },
+          plugins: {
+            // Remove tooltips
+            tooltip: {
+              enabled: false,
+            },
+            // Remove legend
+            legend: {
+              display: false,
+            },
+            // Remove grid
+            gridlines: {
+              display: false,
+            },
+          },
+        },
+      });
+      console.log(myChart);
+
+      console.log(canvas);
+    });
+  }
+  // generateChart(data, iterator) {
+  //   const ctx = document.getElementById(`myChart${iterator}`).getContext("2d");
+  //   const rounded = data.sparkline_in_7d.price.map((entry) => {
+  //     return Math.round(entry);
+  //   });
+  // const myChart = new Chart(ctx, {
+  //   type: "line",
+  //   data: {
+  //     labels: rounded,
+  //     datasets: [
+  //       {
+  //         label: "# of Votes",
+  //         data: rounded,
+  //         backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+  //         borderColor: ["rgba(255, 99, 132, 1)"],
+  //         borderWidth: 1,
+  //       },
+  //     ],
+  //   },
+  //   options: {
+  //     elements: {
+  //       point: {
+  //         radius: 0,
+  //       },
+  //     },
+  //     scales: {
+  //       y: {
+  //         beginAtZero: false,
+  //         // Hide grid Lines y axis
+  //         display: false,
+  //       },
+  //       // Hide grid Lines x axis
+  //       x: {
+  //         display: false,
+  //       },
+  //     },
+  //     plugins: {
+  //       // Remove tooltips
+  //       tooltip: {
+  //         enabled: false,
+  //       },
+  //       // Remove legend
+  //       legend: {
+  //         display: false,
+  //       },
+  //       // Remove grid
+  //       gridlines: {
+  //         display: false,
+  //       },
+  //     },
+  //   },
+  // });
+  // console.log(myChart);
+
+  // console.log(rounded);
+  // const ctx = document.getElementById("myChart").getContext("2d");
+
+  // console.log(myChart);
+  // const myChart = new Chart(ctx, config);
+  // return myChart;
+  // }
   // Display loosers Table ---------------------------------- { Loosers }
   displayLoosers(crypto, indexItem) {
     this.losers.innerHTML += `
