@@ -53,11 +53,17 @@ marketApi
 document.getElementById("ranking").addEventListener("change", (e) => {
   marketApi.changeRanking(e.target.value);
   domUi.refresh();
-  marketApi.getData().then((data) => {
-    data.marketDataJson.forEach((currency, index) => {
-      domUi.createLeaderBoard(currency, index);
+  marketApi
+    .getData()
+    .then((data) => {
+      data.marketDataJson.forEach((currency, index) => {
+        domUi.createLeaderBoard(currency, index);
+      });
+      return data;
+    })
+    .then((data) => {
+      domUi.generateCharts(data.marketDataJson);
     });
-  });
 });
 // Watchlist event -------------------------- { Add WatchList }
 document.getElementById("row").addEventListener("click", (e) => {

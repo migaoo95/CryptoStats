@@ -82,6 +82,7 @@ class DomUI {
     `;
     // this.generateCharts(index);
   }
+  // Generate Charts ------------------------------------ { Charts }
   generateCharts(data) {
     const canvases = document.querySelectorAll(".canvases");
     console.log("Data", data);
