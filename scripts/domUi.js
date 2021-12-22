@@ -71,7 +71,11 @@ class DomUI {
              : "text-danger"
          }">${
       Math.round(currency.price_change_percentage_7d_in_currency * 100) / 100
-    }%</span></h6>
+    }</span><span class="${
+      currency.price_change_percentage_7d_in_currency >= 0
+        ? "text-success"
+        : "text-danger"
+    }">%</span></h6>
 
       <canvas class="canvases" id="myChart${index}"></canvas>
       
@@ -85,8 +89,17 @@ class DomUI {
   // Generate Charts ------------------------------------ { Charts }
   generateCharts(data) {
     const canvases = document.querySelectorAll(".canvases");
-    console.log("Data", data);
+    // console.log("Data", data);
     canvases.forEach((canvas, index) => {
+      // Price of each coin --------------- {}
+      const sevenDayPrice = document
+        .getElementById(`myChart${index}`)
+        .parentElement.getElementsByTagName("h6")[3]
+        .getElementsByTagName("span")[1].textContent;
+      // If statement
+      let color;
+      const stetement = sevenDayPrice < 0 ? (color = "red") : (color = "green");
+      // console.log("My Tag", sevenDayPrice);
       const ctx = document.getElementById(`myChart${index}`).getContext("2d");
       const myChart = new Chart(ctx, {
         type: "line",
@@ -96,8 +109,8 @@ class DomUI {
             {
               label: "# of Votes",
               data: data[index].sparkline_in_7d.price,
-              backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-              borderColor: ["rgba(255, 99, 132, 1)"],
+              backgroundColor: [color],
+              borderColor: [color],
               borderWidth: 0.5,
             },
           ],
@@ -135,9 +148,9 @@ class DomUI {
           },
         },
       });
-      console.log(myChart);
+      // console.log(myChart);
 
-      console.log(canvas);
+      // console.log(canvas);
     });
   }
   // generateChart(data, iterator) {
