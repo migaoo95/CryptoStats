@@ -5,6 +5,10 @@ class DomUI {
     this.losers = document.getElementById("losersTable");
     this.modalHeader = document.querySelector(".modal-header");
     this.modalTable = document.querySelector("#modalTable");
+    this.progressBar = document.getElementById("progress");
+    // this.leaderModalTitle = document.getElementById("modal-title");
+    this.leaderModalBody = document.getElementById("lModalBody");
+    this.leaderModalHeader = document.getElementById("lModalHeader");
   }
   // Update leaderboard
   refresh() {
@@ -20,7 +24,7 @@ class DomUI {
   }
   // Check THis -------------------------- { CHECK }  -------
   watchListClasses(allTokens) {
-    console.log(allTokens);
+    // console.log(allTokens);
   }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
@@ -41,24 +45,25 @@ class DomUI {
       currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
 
     this.leaderBoard.innerHTML += `
-    <div id="leaderCard" class="col-lg-3 col-md-6 mb-5">
-    <div class="card">
+    <div id="leaderCard" class="col-lg-3 col-md-6 mb-5" >
+    <div class="card cardDiv">
    <div class="d-flex justify-content-between position-absolute w-100">
-    <h6 class="  m-1 p-1">${index + 1}</h6>
+    <h6 class="h6 m-1 p-1">${index + 1}</h6>
     <i style="vertical-align: middle; font-size:20px;" class="${tokenClass} star far fa-star mt-1 p-1 text-muted"></i>
     </div>
-      <div class="card-body text-center">
+      <div 
+      data-target="#leaderModal" class="card-leader card-body text-center">
         <img style="margin-top: -50px"
           src="${currency.image}"
           alt=""
           class="img-fluid rounded-circle w-50 mb-3"
         />
        
-        <h6>${coinCapitalized}</h6>
-        <h6 class="">${
+        <h6 class="h6">${coinCapitalized}</h6>
+        <h6 class="h6">${
           currency.current_price
-        } <span class="text-success">$</span></h6>
-        <h6><span>24h: </span> <span class="${
+        } <span class="h6 text-success">$</span></h6>
+        <h6 class="h6"><span class="h6" span>24h: </span> <span class="${
           currency.price_change_percentage_24h >= 0
             ? "text-success"
             : "text-danger"
@@ -290,5 +295,41 @@ class DomUI {
     </tr>
     `;
     // console.log(sortCoinss);
+  }
+  // LeaderBoard Modal ---------------------------------- { Leader Modal }
+  leaderModal(coin) {
+    console.log(coin.image);
+    this.leaderModalHeader.innerHTML = `
+    <h4 class="">${
+      coin.id
+    }</h4><h5 class="text-muted ml-2 pt-1">${coin.symbol.toUpperCase()}</h5>
+    `;
+    this.leaderModalBody.innerHTML = `
+  <div class="row">
+    <div class="col-6"><img class="img-fluid w-20"  src="${coin.image.large}"></div>
+    <div class="col-12">
+    <div id="accordion">
+    <div class="card">
+      <div class="card-header">
+        <h5>
+          <a
+            href="#collapse1"
+            data-parent="#accordion"
+            data-toggle="collapse"
+          >
+           About <span>${coin.id}</span>
+          </a>
+        </h5>
+      </div>
+
+      <div id="collapse1" class="collapse">
+        <div class="card-body">
+        <p>${coin.description.en}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+   </div>
+    `;
   }
 }

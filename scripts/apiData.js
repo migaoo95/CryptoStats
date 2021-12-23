@@ -1,5 +1,5 @@
 class ApiData {
-  constructor(top) {
+  constructor(currencyName) {
     this.topTwoHundred = 250;
     this.defaultRanking = 10;
     this.ranking = this.defaultRanking;
@@ -15,11 +15,22 @@ class ApiData {
     const marketDataResponseAll = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${this.topTwoHundred}&page=1&sparkline=false`
     );
+
     const marketDataJson = await marketDataResponse.json();
     const marketDataJsonAll = await marketDataResponseAll.json();
+
     return {
       marketDataJson,
       marketDataJsonAll,
+    };
+  }
+  async getCoinData(coin) {
+    const coinDataResponse = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${coin}?tickers=true&market_data=true&community_data=true&developer_data=true`
+    );
+    const coinDataJson = await coinDataResponse.json();
+    return {
+      coinDataJson,
     };
   }
 }

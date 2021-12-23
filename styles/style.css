@@ -41,3 +41,6 @@
 .modal-header {
   justify-content: start;
 }
+.card-leader {
+  cursor: pointer;
+}

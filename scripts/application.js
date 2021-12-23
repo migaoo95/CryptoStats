@@ -4,7 +4,36 @@ const marketApi = new ApiData();
 const domUi = new DomUI();
 // Init LocalStorage Class
 const storage = new Store();
-
+// Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
+document.querySelector(".row").addEventListener("click", (e) => {
+  if (e.target.parentElement.classList.contains("card-leader")) {
+    marketApi
+      .getCoinData(e.target.parentElement.children[1].textContent.toLowerCase())
+      .then((data) => {
+        domUi.leaderModal(data.coinDataJson);
+        console.log(data.coinDataJson);
+      });
+  } else if (e.target.parentElement.classList.contains("h6")) {
+    marketApi
+      .getCoinData(
+        e.target.parentElement.parentElement.children[1].textContent.toLowerCase()
+      )
+      .then((data) => {
+        domUi.leaderModal(data.coinDataJson);
+        console.log(data.coinDataJson);
+      });
+  } else if (e.target.parentElement.classList.contains("cardDiv")) {
+    marketApi
+      .getCoinData(
+        e.target.parentElement.children[1].children[1].textContent.toLowerCase()
+      )
+      .then((data) => {
+        domUi.leaderModal(data.coinDataJson);
+        console.log(data.coinDataJson);
+      });
+  }
+  //   console.log(e.target.parentElement);
+});
 // Sort Price Change Precentage DESC  ------------------------------- { Helper Function }
 function sortDataLow(arr) {
   const sortCoinss = arr.sort((a, b) => {
@@ -19,6 +48,7 @@ function sortDataGrow(arr) {
   });
   return sortCoinss;
 }
+
 // Get Api object on load ------------------------- { Promise }
 marketApi
   .getData()
@@ -42,6 +72,8 @@ marketApi
     // ForEach data recived call UI method -------------------------- { LeaderBoard }
     data.marketDataJson.forEach((currency, index) => {
       domUi.createLeaderBoard(currency, index);
+
+      //   console.log("Here", data.marketDataJson.length); // Here
     });
     return data;
   })
@@ -59,6 +91,7 @@ document.getElementById("ranking").addEventListener("change", (e) => {
       data.marketDataJson.forEach((currency, index) => {
         domUi.createLeaderBoard(currency, index);
       });
+
       return data;
     })
     .then((data) => {
