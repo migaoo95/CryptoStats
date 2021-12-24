@@ -306,25 +306,52 @@ class DomUI {
     `;
     this.leaderModalBody.innerHTML = `
   <div class="row">
-    <div class="col-6"><img class="img-fluid w-20"  src="${coin.image.large}"></div>
+    <div class="col-6">
+    <div class="mb-3">
+    <span class="bg-dark p-1 rounded text-white">Rank #${
+      coin.market_cap_rank
+    }</span></div>
+    <div class="d-flex">
+    <img id="d-image" class="img-fluid" src="${coin.image.small}">
+    <h5 class="pt-2 ml-2">${coin.id}</h5>
+    <div class="position-relative mt-2">
+    <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
+    
+    </div>
+    <span><i style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 ml-1 p-1 text-muted"></i></span>
+    </div>
+
+    <div class="d-flex">
+    <h2><span class="mr-1">$</span>${coin.market_data.current_price.usd}</h2>
+<div id="divProBox" >
+    <span id="bgPro" class="rounded ml-2 text-white p-2 position-relative"><i style="vertical-aling:middle;" class="mt-1 mr-1 fas fa-chevron-down"></i>${coin.market_data.price_change_percentage_24h.toFixed(
+      2
+    )}%</span>
+    </div>
+    </div>
+
+    </div>
+    <div class="col-6"></div>
     <div class="col-12">
     <div id="accordion">
     <div class="card">
-      <div class="card-header">
-        <h5>
+      <div class="card-header text-center">
+        <h5 id="accordion">
           <a
             href="#collapse1"
             data-parent="#accordion"
             data-toggle="collapse"
           >
-           About <span>${coin.id}</span>
+           About <span class="acc">${
+             coin.id
+           } <i id="accArrow" class="acc fas fa-arrow-alt-circle-right"></i></span>
           </a>
         </h5>
       </div>
 
       <div id="collapse1" class="collapse">
         <div class="card-body">
-        <p>${coin.description.en}</p>
+        <p class"text-monospace">${coin.description.en}</p>
         </div>
       </div>
     </div>

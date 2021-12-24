@@ -44,3 +44,12 @@
 .card-leader {
   cursor: pointer;
 }
+#d-image {
+  margin-top: -5px;
+}
+#bgPro {
+  background-color: #16c784;
+}
+#divProBox {
+  margin-top: 6px;
+}

@@ -136,3 +136,17 @@ document.querySelectorAll("#linkMore").forEach((link) => {
     });
   });
 });
+// Simple Accordion anim ----------------------- { Accordion }
+document.getElementById("leaderModal").addEventListener("click", (e) => {
+  if (e.target.classList.contains("acc")) {
+    document.getElementById("accArrow").className =
+      "fas fa-arrow-alt-circle-down";
+    e.target.classList.remove("acc");
+  } else {
+    document.getElementById("accArrow").className =
+      "fas fa-arrow-alt-circle-right";
+    e.target.classList.add("acc");
+  }
+
+  console.log(e.target);
+});
