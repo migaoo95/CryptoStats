@@ -92,72 +92,7 @@ class DomUI {
     // this.generateCharts(index);
   }
   // Generate Charts ------------------------------------ { Charts }
-  generateCharts(data) {
-    const canvases = document.querySelectorAll(".canvases");
-    // console.log("Data", data);
-    canvases.forEach((canvas, index) => {
-      // Price of each coin --------------- {}
-      const sevenDayPrice = document
-        .getElementById(`myChart${index}`)
-        .parentElement.getElementsByTagName("h6")[3]
-        .getElementsByTagName("span")[1].textContent;
-      // If statement
-      let color;
-      const stetement = sevenDayPrice < 0 ? (color = "red") : (color = "green");
-      // console.log("My Tag", sevenDayPrice);
-      const ctx = document.getElementById(`myChart${index}`).getContext("2d");
-      const myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: data[index].sparkline_in_7d.price,
-          datasets: [
-            {
-              label: "# of Votes",
-              data: data[index].sparkline_in_7d.price,
-              backgroundColor: [color],
-              borderColor: [color],
-              borderWidth: 0.5,
-            },
-          ],
-        },
-        options: {
-          elements: {
-            point: {
-              radius: 0,
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: false,
-              // Hide grid Lines y axis
-              display: false,
-            },
-            // Hide grid Lines x axis
-            x: {
-              display: false,
-            },
-          },
-          plugins: {
-            // Remove tooltips
-            tooltip: {
-              enabled: false,
-            },
-            // Remove legend
-            legend: {
-              display: false,
-            },
-            // Remove grid
-            gridlines: {
-              display: false,
-            },
-          },
-        },
-      });
-      // console.log(myChart);
 
-      // console.log(canvas);
-    });
-  }
   // generateChart(data, iterator) {
   //   const ctx = document.getElementById(`myChart${iterator}`).getContext("2d");
   //   const rounded = data.sparkline_in_7d.price.map((entry) => {
@@ -296,9 +231,31 @@ class DomUI {
     `;
     // console.log(sortCoinss);
   }
+
+  // Contracts in Selects ---------------------------------- { Contracts Helper }
+  outputContracts(contracts) {
+    const contractss = document.getElementById("contracts");
+    // Convert Object into Array
+    const arr = Object.entries(contracts);
+    // console.log(arr);
+    let select;
+    arr.forEach((entry) => {
+      if (entry[1] > 3) {
+        select += `<option><span class="text-muted">${
+          entry[0]
+        }</span> ${contractShortener(entry[1])}</option>`;
+      }
+      // console.log(entry);
+    });
+    return select;
+    // console.log(arr);
+    // contracts.forEach((contract) => {
+    //   console.log(contract);
+    // });
+  }
   // LeaderBoard Modal ---------------------------------- { Leader Modal }
   leaderModal(coin) {
-    console.log(coin.image);
+    // console.log(coin.image);
     this.leaderModalHeader.innerHTML = `
     <h4 class="">${
       coin.id
@@ -306,7 +263,7 @@ class DomUI {
     `;
     this.leaderModalBody.innerHTML = `
   <div class="row">
-    <div class="col-6">
+    <div class="col-6 px-5">
     <div class="mb-3">
     <span class="bg-dark p-1 rounded text-white">Rank #${
       coin.market_cap_rank
@@ -324,14 +281,90 @@ class DomUI {
     <div class="d-flex">
     <h2><span class="mr-1">$</span>${coin.market_data.current_price.usd}</h2>
 <div id="divProBox" >
-    <span id="bgPro" class="rounded ml-2 text-white p-2 position-relative"><i style="vertical-aling:middle;" class="mt-1 mr-1 fas fa-chevron-down"></i>${coin.market_data.price_change_percentage_24h.toFixed(
-      2
-    )}%</span>
+    <span  class="rounded ml-2 ${
+      coin.market_data.price_change_percentage_24h.toFixed(2) > 0
+        ? "bg-success"
+        : "bg-danger"
+    } text-white p-2 position-relative"><i style="vertical-aling:middle;" class="mt-1 mr-1 fas fa-chevron-${
+      coin.market_data.price_change_percentage_24h.toFixed(2) > 0
+        ? "up"
+        : "down"
+    }"></i>${coin.market_data.price_change_percentage_24h.toFixed(2)}%</span>
+    </div>
+    </div>
+    <div>
+    <h6 class="text-muted">Market Cap: <span class="text-dark">$</span> <span class="text-dark">${numberWithCommas(
+      coin.market_data.market_cap.usd
+    )}</span></h6>
+    <h6 class="text-muted">Volume: <span class="text-dark">$</span> <span class="text-dark">${numberWithCommas(
+      coin.market_data.total_volume.usd
+    )}</span>   </h6>
+    
+    
+
     </div>
     </div>
 
+
+
+
+
+
+    <div class="col-6">
+   
+    <span class="mb-2"><a id="website" class="p-1  bg-dark rounded text-white position-relative" target="_blank" href="${
+      coin.links.homepage[0]
+    }">${shortenUrlString(
+      coin.links.homepage[0]
+    )} <i class="fas fa-external-link-alt"></i></a></span>
+
+
+       
+          <h6 class="text-muted mt-2">Contracts:</h6>
+          <div class="mb-2 d-flex">
+
+         <select class="form-control w-auto" id="contracts">${this.outputContracts(
+           coin.platforms
+         )}</select> <i id="iconC" class="ml-2 mt-1 text-muted far fa-copy"></i>
+    
+      </div>
+      <div class="border border-info rounded p-1 mb-2" >
+      <h6 class="text-muted">Total Supply: <span class="text-dark">${
+        coin.market_data.total_supply
+      }</span></h6>
+      <h6 class="text-muted">Circulating Supply: <span class="text-dark">${
+        coin.market_data.circulating_supply
+      }</span></h6>
+      <div class="progress mt-2">
+      
+      <div
+        class="
+          progress-bar
+          bg-info
+          progress-bar-striped progress-bar-animated
+        "
+        style="width: ${calculatePrecentage(
+          coin.market_data.circulating_supply,
+          coin.market_data.total_supply
+        )}%"
+      >
+      ${calculatePrecentage(
+        coin.market_data.circulating_supply,
+        coin.market_data.total_supply
+      )}%
+      </div>
+      </div>
     </div>
-    <div class="col-6"></div>
+    </div>
+   <div class="col-12">
+   <div class="card mb-2">
+   <div class="card-header text-center">
+   <p class="m-0">Hello</p>
+   </div>
+   <canvas class="canvases" id="myChartBoard"></canvas>
+   </div>
+   
+   </div>
     <div class="col-12">
     <div id="accordion">
     <div class="card">

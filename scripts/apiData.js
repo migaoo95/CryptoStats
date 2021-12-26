@@ -28,9 +28,14 @@ class ApiData {
     const coinDataResponse = await fetch(
       `https://api.coingecko.com/api/v3/coins/${coin}?tickers=true&market_data=true&community_data=true&developer_data=true`
     );
+    const coinChartResponse =
+      await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=7
+    `);
     const coinDataJson = await coinDataResponse.json();
+    const coinChartJson = await coinChartResponse.json();
     return {
       coinDataJson,
+      coinChartJson,
     };
   }
 }

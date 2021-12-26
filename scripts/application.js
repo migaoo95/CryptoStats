@@ -1,9 +1,9 @@
-// Init Api Class
+// Init Classes ---------------------- { Init }
 const marketApi = new ApiData();
-// Init Dom Ui Class
 const domUi = new DomUI();
-// Init LocalStorage Class
 const storage = new Store();
+const charts = new Charts();
+
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
   if (e.target.parentElement.classList.contains("card-leader")) {
@@ -11,7 +11,9 @@ document.querySelector(".row").addEventListener("click", (e) => {
       .getCoinData(e.target.parentElement.children[1].textContent.toLowerCase())
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
-        console.log(data.coinDataJson);
+        charts.generateSingleChart(data.coinChartJson);
+        console.log(data.coinChartJson);
+        // console.log(data.coinDataJson);
       });
   } else if (e.target.parentElement.classList.contains("h6")) {
     marketApi
@@ -20,7 +22,9 @@ document.querySelector(".row").addEventListener("click", (e) => {
       )
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
-        console.log(data.coinDataJson);
+        charts.generateSingleChart(data.coinChartJson);
+        console.log(data.coinChartJson);
+        // console.log(data.coinDataJson);
       });
   } else if (e.target.parentElement.classList.contains("cardDiv")) {
     marketApi
@@ -29,7 +33,9 @@ document.querySelector(".row").addEventListener("click", (e) => {
       )
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
-        console.log(data.coinDataJson);
+        charts.generateSingleChart(data.coinChartJson);
+        console.log(data.coinChartJson);
+        // console.log(data.coinDataJson);
       });
   }
   //   console.log(e.target.parentElement);
@@ -79,7 +85,7 @@ marketApi
   })
   .then((data) => {
     // console.log(data.marketDataJson);
-    domUi.generateCharts(data.marketDataJson);
+    charts.generateCharts(data.marketDataJson);
   });
 // Change amount of coins displaied within Leaderboard -------------------------- { Change LeaderBoard }
 document.getElementById("ranking").addEventListener("change", (e) => {
@@ -95,7 +101,7 @@ document.getElementById("ranking").addEventListener("change", (e) => {
       return data;
     })
     .then((data) => {
-      domUi.generateCharts(data.marketDataJson);
+      charts.generateCharts(data.marketDataJson);
     });
 });
 // Watchlist event -------------------------- { Add WatchList }
@@ -150,3 +156,12 @@ document.getElementById("leaderModal").addEventListener("click", (e) => {
 
   console.log(e.target);
 });
+// Calculator
+let total = 3000;
+let amount = 100;
+
+function calculateProcent(total, amount) {
+  const result = (amount / total) * 100;
+  console.log(result, "%");
+}
+calculateProcent(total, amount);

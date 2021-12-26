@@ -53,3 +53,13 @@
 #divProBox {
   margin-top: 6px;
 }
+#iconC {
+  cursor: pointer;
+  font-size: 25px !important;
+}
+#website {
+  background-color: rgb(199, 199, 199);
+}
+#proBoxSmall {
+  font-size: 12px !important;
+}
