@@ -40,6 +40,7 @@ document.querySelector(".row").addEventListener("click", (e) => {
   }
   //   console.log(e.target.parentElement);
 });
+
 // Sort Price Change Precentage DESC  ------------------------------- { Helper Function }
 function sortDataLow(arr) {
   const sortCoinss = arr.sort((a, b) => {
@@ -47,6 +48,7 @@ function sortDataLow(arr) {
   });
   return sortCoinss;
 }
+
 // Sort Price Change Precentage ASC  ------------------------------- { Helper Function  }
 function sortDataGrow(arr) {
   const sortCoinss = arr.sort((a, b) => {
@@ -59,18 +61,14 @@ function sortDataGrow(arr) {
 marketApi
   .getData()
   .then((data) => {
-    // ---------------------------------- { Construction } ----------------------------- ???????
-
-    // ---------------------------------- { Construction } ----------------------------- ???????
     console.log(data.marketDataJson);
-    //   Sort Gainers and Losers Data and Display in the DOM ------------------------- { Gainers / Losers }
     const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 3);
     const newSliced = sortDataLow(data.marketDataJsonAll).slice(-3).reverse();
-    // GAINERS
+    // SORT GAINERS
     slicedArray.forEach((coin, index) => {
       domUi.displayLoosers(coin, index);
     });
-    //   LOOSERS
+    // SORT LOOSERS
     newSliced.forEach((coin, index) => {
       domUi.displayGainers(coin, index);
     });
@@ -87,6 +85,7 @@ marketApi
     // console.log(data.marketDataJson);
     charts.generateCharts(data.marketDataJson);
   });
+
 // Change amount of coins displaied within Leaderboard -------------------------- { Change LeaderBoard }
 document.getElementById("ranking").addEventListener("change", (e) => {
   marketApi.changeRanking(e.target.value);
@@ -113,6 +112,7 @@ document.getElementById("row").addEventListener("click", (e) => {
     domUi.watchList(e.target.parentElement.children[1]);
   }
 });
+
 // MODAL  ------------------------------- { Event Modal }
 document.querySelectorAll("#linkMore").forEach((link) => {
   link.addEventListener("click", (e) => {
@@ -122,7 +122,6 @@ document.querySelectorAll("#linkMore").forEach((link) => {
     } else {
       headers = false;
     }
-
     domUi.refreshModal();
     domUi.changeHeader(headers);
     marketApi.getData().then((data) => {
@@ -142,6 +141,7 @@ document.querySelectorAll("#linkMore").forEach((link) => {
     });
   });
 });
+
 // Simple Accordion anim ----------------------- { Accordion }
 document.getElementById("leaderModal").addEventListener("click", (e) => {
   if (e.target.classList.contains("acc")) {
@@ -156,12 +156,32 @@ document.getElementById("leaderModal").addEventListener("click", (e) => {
 
   console.log(e.target);
 });
-// Calculator
-let total = 3000;
-let amount = 100;
 
-function calculateProcent(total, amount) {
-  const result = (amount / total) * 100;
-  console.log(result, "%");
-}
-calculateProcent(total, amount);
+// Change Time Stamp Click Event ----------------------- { TimeStamp }
+document.getElementById("lModalBody").addEventListener("click", (e) => {
+  if (e.target.classList.contains("btnChangeTime")) {
+    marketApi.changeChartTimeStamp(e.target.value);
+    marketApi
+      .getCoinData(e.target.parentElement.parentElement.children[0].textContent)
+      .then((data) => {
+        document.getElementById("myChartBoard").remove();
+        document.getElementById("chartBox").innerHTML =
+          ' <canvas class="canvases" style="cursor: pointer;" id="myChartBoard"></canvas>';
+        return data;
+        // document.getElementById("myChartBoard").innerHTML = "";
+      })
+      .then((data) => {
+        charts.generateSingleChart(data.coinChartJson);
+      });
+    // e.target.parentElement.parentElement.children[0].textContent
+  }
+});
+// // Calculator
+// let total = 3000;
+// let amount = 100;
+
+// function calculateProcent(total, amount) {
+//   const result = (amount / total) * 100;
+//   console.log(result, "%");
+// }
+// calculateProcent(total, amount);

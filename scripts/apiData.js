@@ -3,7 +3,15 @@ class ApiData {
     this.topTwoHundred = 250;
     this.defaultRanking = 10;
     this.ranking = this.defaultRanking;
+    this.chartTimeStamp = this.chartTimeStamp;
+    this.dafaultTimeStamp = 1;
   }
+  // Change A Chart Timestamp ------------------ { TimeStamp }
+  changeChartTimeStamp(timeStamp) {
+    this.dafaultTimeStamp = timeStamp;
+    console.log("New Ranking", this.dafaultTimeStamp);
+  }
+  // Change how many coins are recived in a API Call --------------- { Ranking Amount Shown }
   changeRanking(newRanking) {
     this.ranking = newRanking;
   }
@@ -29,7 +37,7 @@ class ApiData {
       `https://api.coingecko.com/api/v3/coins/${coin}?tickers=true&market_data=true&community_data=true&developer_data=true`
     );
     const coinChartResponse =
-      await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=7
+      await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${this.dafaultTimeStamp}
     `);
     const coinDataJson = await coinDataResponse.json();
     const coinChartJson = await coinChartResponse.json();

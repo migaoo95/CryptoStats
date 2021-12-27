@@ -51,7 +51,7 @@ class DomUI {
     <h6 class="h6 m-1 p-1">${index + 1}</h6>
     <i style="vertical-align: middle; font-size:20px;" class="${tokenClass} star far fa-star mt-1 p-1 text-muted"></i>
     </div>
-      <div 
+      <div data-toggle="modal"
       data-target="#leaderModal" class="card-leader card-body text-center">
         <img style="margin-top: -50px"
           src="${currency.image}"
@@ -91,69 +91,7 @@ class DomUI {
     `;
     // this.generateCharts(index);
   }
-  // Generate Charts ------------------------------------ { Charts }
 
-  // generateChart(data, iterator) {
-  //   const ctx = document.getElementById(`myChart${iterator}`).getContext("2d");
-  //   const rounded = data.sparkline_in_7d.price.map((entry) => {
-  //     return Math.round(entry);
-  //   });
-  // const myChart = new Chart(ctx, {
-  //   type: "line",
-  //   data: {
-  //     labels: rounded,
-  //     datasets: [
-  //       {
-  //         label: "# of Votes",
-  //         data: rounded,
-  //         backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-  //         borderColor: ["rgba(255, 99, 132, 1)"],
-  //         borderWidth: 1,
-  //       },
-  //     ],
-  //   },
-  //   options: {
-  //     elements: {
-  //       point: {
-  //         radius: 0,
-  //       },
-  //     },
-  //     scales: {
-  //       y: {
-  //         beginAtZero: false,
-  //         // Hide grid Lines y axis
-  //         display: false,
-  //       },
-  //       // Hide grid Lines x axis
-  //       x: {
-  //         display: false,
-  //       },
-  //     },
-  //     plugins: {
-  //       // Remove tooltips
-  //       tooltip: {
-  //         enabled: false,
-  //       },
-  //       // Remove legend
-  //       legend: {
-  //         display: false,
-  //       },
-  //       // Remove grid
-  //       gridlines: {
-  //         display: false,
-  //       },
-  //     },
-  //   },
-  // });
-  // console.log(myChart);
-
-  // console.log(rounded);
-  // const ctx = document.getElementById("myChart").getContext("2d");
-
-  // console.log(myChart);
-  // const myChart = new Chart(ctx, config);
-  // return myChart;
-  // }
   // Display loosers Table ---------------------------------- { Loosers }
   displayLoosers(crypto, indexItem) {
     this.losers.innerHTML += `
@@ -299,19 +237,10 @@ class DomUI {
     <h6 class="text-muted">Volume: <span class="text-dark">$</span> <span class="text-dark">${numberWithCommas(
       coin.market_data.total_volume.usd
     )}</span>   </h6>
-    
-    
 
     </div>
     </div>
-
-
-
-
-
-
     <div class="col-6">
-   
     <span class="mb-2"><a id="website" class="p-1  bg-dark rounded text-white position-relative" target="_blank" href="${
       coin.links.homepage[0]
     }">${shortenUrlString(
@@ -357,11 +286,19 @@ class DomUI {
     </div>
     </div>
    <div class="col-12">
-   <div class="card mb-2">
-   <div class="card-header text-center">
-   <p class="m-0">Hello</p>
+   <div class="card mb-2 mt-2">
+   <div class="card-header d-flex">
+   <p class=" align-self-center mr-1 h6">${coin.id}</p> 
+   <p class=" align-self-center h6">  to USD Chart</p>
+   <div class="ml-auto">
+   <button value="1" class="btn btn-secondary btnChangeTime active p-1">24h</button>
+   <button value="7" class="btn btn-secondary btnChangeTime p-1 ">7D</button>
+   <button value="30" class="btn btn-secondary btnChangeTime p-1">1M</button>
    </div>
-   <canvas class="canvases" id="myChartBoard"></canvas>
+   </div>
+   <div id="chartBox">
+   <canvas class="canvases" style="cursor: pointer;" id="myChartBoard"></canvas>
+   </div>
    </div>
    
    </div>

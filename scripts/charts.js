@@ -24,7 +24,7 @@ class Charts {
               data: data[index].sparkline_in_7d.price,
               backgroundColor: [color],
               borderColor: [color],
-              borderWidth: 0.5,
+              borderWidth: 1,
             },
           ],
         },
@@ -76,18 +76,18 @@ class Charts {
         labels: coin.prices,
         datasets: [
           {
-            label: "# of Votes",
+            label: "",
             data: coin.prices,
-            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-            borderColor: ["rgba(255, 99, 132, 1)"],
-            borderWidth: 3,
+            backgroundColor: ["blue"],
+            borderColor: ["blue"],
+            borderWidth: 2,
           },
         ],
       },
       options: {
         elements: {
           point: {
-            radius: 0,
+            radius: 0.5,
           },
         },
         scales: {
@@ -103,9 +103,11 @@ class Charts {
         },
         plugins: {
           // Remove tooltips
-          //   tooltip: {
-          //     enabled: false,
-          //   },
+          tooltip: {
+            callbacks: {
+              title: function () {},
+            },
+          },
           // Remove legend
           legend: {
             display: false,
