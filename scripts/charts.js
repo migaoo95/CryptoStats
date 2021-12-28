@@ -67,7 +67,6 @@ class Charts {
     });
   }
   generateSingleChart(coin, color) {
-    console.log("Coin");
     const ctx = document.getElementById("myChartBoard").getContext("2d");
 
     const myChart = new Chart(ctx, {
@@ -119,6 +118,6 @@ class Charts {
         },
       },
     });
-    console.log(myChart);
+    // console.log(myChart);
   }
 }

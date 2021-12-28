@@ -7,13 +7,21 @@ const charts = new Charts();
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
   if (e.target.parentElement.classList.contains("card-leader")) {
+    let watchList;
+
     marketApi
       .getCoinData(e.target.parentElement.children[1].textContent.toLowerCase())
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
         charts.generateSingleChart(data.coinChartJson);
-        console.log(data.coinChartJson);
+        console.log("Coin Data", data.coinDataJson);
+        return e.target.parentElement.children[1].textContent;
         // console.log(data.coinDataJson);
+      })
+      .then((data) => {
+        if (storage.getStoredData().includes(data)) {
+          document.getElementById("starModal").classList.add("starActive");
+        }
       });
   } else if (e.target.parentElement.classList.contains("h6")) {
     marketApi
@@ -23,8 +31,14 @@ document.querySelector(".row").addEventListener("click", (e) => {
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
         charts.generateSingleChart(data.coinChartJson);
-        console.log(data.coinChartJson);
+        console.log("Coin Data", data.coinDataJson);
+        return e.target.parentElement.parentElement.children[1].textContent;
         // console.log(data.coinDataJson);
+      })
+      .then((data) => {
+        if (storage.getStoredData().includes(data)) {
+          document.getElementById("starModal").classList.add("starActive");
+        }
       });
   } else if (e.target.parentElement.classList.contains("cardDiv")) {
     marketApi
@@ -34,28 +48,18 @@ document.querySelector(".row").addEventListener("click", (e) => {
       .then((data) => {
         domUi.leaderModal(data.coinDataJson);
         charts.generateSingleChart(data.coinChartJson);
-        console.log(data.coinChartJson);
+        console.log("Coin Data", data.coinDataJson);
+        return e.target.parentElement.children[1].children[1].textContent;
         // console.log(data.coinDataJson);
+      })
+      .then((data) => {
+        if (storage.getStoredData().includes(data)) {
+          document.getElementById("starModal").classList.add("starActive");
+        }
       });
   }
   //   console.log(e.target.parentElement);
 });
-
-// Sort Price Change Precentage DESC  ------------------------------- { Helper Function }
-function sortDataLow(arr) {
-  const sortCoinss = arr.sort((a, b) => {
-    return a.price_change_percentage_24h - b.price_change_percentage_24h;
-  });
-  return sortCoinss;
-}
-
-// Sort Price Change Precentage ASC  ------------------------------- { Helper Function  }
-function sortDataGrow(arr) {
-  const sortCoinss = arr.sort((a, b) => {
-    return b.price_change_percentage_24h - a.price_change_percentage_24h;
-  });
-  return sortCoinss;
-}
 
 // Get Api object on load ------------------------- { Promise }
 marketApi
@@ -159,6 +163,18 @@ document.getElementById("leaderModal").addEventListener("click", (e) => {
 
 // Change Time Stamp Click Event ----------------------- { TimeStamp }
 document.getElementById("lModalBody").addEventListener("click", (e) => {
+  // Copy Currency Address to ClipBoard ----
+  if (e.target.id == "iconC") {
+    const clip = document.createElement("input");
+    document.body.appendChild(clip);
+    clip.setAttribute("id", "clip_id");
+    document.getElementById("clip_id").value =
+      e.target.parentElement.firstElementChild.value;
+    clip.select();
+    document.execCommand("copy");
+    document.body.removeChild(clip);
+  }
+  // Darw a Chart inside a modal  -----
   if (e.target.classList.contains("btnChangeTime")) {
     marketApi.changeChartTimeStamp(e.target.value);
     marketApi
@@ -176,6 +192,11 @@ document.getElementById("lModalBody").addEventListener("click", (e) => {
     // e.target.parentElement.parentElement.children[0].textContent
   }
 });
+// Copy to Clipboard --------------------- { ClipBoard }
+document.getElementById("iconC");
+// document.getElementById("closeModal").addEventListener("click", () => {
+//   domUi.refreshLeader();
+// });
 // // Calculator
 // let total = 3000;
 // let amount = 100;

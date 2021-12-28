@@ -1,3 +1,6 @@
+// Init Storage ----
+const storageDom = new Store();
+// Class
 class DomUI {
   constructor() {
     this.leaderBoard = document.getElementById("row");
@@ -179,7 +182,7 @@ class DomUI {
     let select;
     arr.forEach((entry) => {
       if (entry[1] > 3) {
-        select += `<option><span class="text-muted">${
+        select += `<option value="${entry[1]}"><span class="text-muted">${
           entry[0]
         }</span> ${contractShortener(entry[1])}</option>`;
       }
@@ -191,6 +194,13 @@ class DomUI {
     //   console.log(contract);
     // });
   }
+
+  // Refresh LeaderBoard Modal ---------------------------------- { Leader Refresh }
+  // refreshLeader() {
+  //   this.leaderModalHeader.innerHTML = "";
+  //   this.leaderModalBody.innerHTML = "";
+  // }
+
   // LeaderBoard Modal ---------------------------------- { Leader Modal }
   leaderModal(coin) {
     // console.log(coin.image);
@@ -213,7 +223,7 @@ class DomUI {
     <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
     
     </div>
-    <span><i style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 ml-1 p-1 text-muted"></i></span>
+    <span><i id="starModal" style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 ml-1 p-1 text-muted"></i></span>
     </div>
 
     <div class="d-flex">
@@ -290,8 +300,8 @@ class DomUI {
    <div class="card-header d-flex">
    <p class=" align-self-center mr-1 h6">${coin.id}</p> 
    <p class=" align-self-center h6">  to USD Chart</p>
-   <div class="ml-auto">
-   <button value="1" class="btn btn-secondary btnChangeTime active p-1">24h</button>
+   <div class=" ml-auto">
+   <button value="1" class="btn btn-secondary btnChangeTime p-1">24h</button>
    <button value="7" class="btn btn-secondary btnChangeTime p-1 ">7D</button>
    <button value="30" class="btn btn-secondary btnChangeTime p-1">1M</button>
    </div>
