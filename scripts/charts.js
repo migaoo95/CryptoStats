@@ -29,6 +29,8 @@ class Charts {
           ],
         },
         options: {
+          events: [],
+
           elements: {
             point: {
               radius: 0,
@@ -46,6 +48,9 @@ class Charts {
             },
           },
           plugins: {
+            crosshair: {
+              enabled: false,
+            },
             // Remove tooltips
             tooltip: {
               enabled: false,
@@ -71,22 +76,31 @@ class Charts {
 
     const myChart = new Chart(ctx, {
       type: "line",
+
       data: {
         labels: coin.prices,
         datasets: [
           {
             label: "",
             data: coin.prices,
-            backgroundColor: ["blue"],
-            borderColor: ["blue"],
+            backgroundColor: ["#5bc0de"],
+            borderColor: ["#5bc0de"],
             borderWidth: 2,
+            showLine: true,
+            fill: false,
+            tension: 0.1,
+            pointRadius: 0,
+            interpolate: true,
           },
         ],
       },
       options: {
+        crosshair: {
+          color: "#000",
+        },
         elements: {
           point: {
-            radius: 0.5,
+            radius: 1,
           },
         },
         scales: {
@@ -102,10 +116,35 @@ class Charts {
         },
         plugins: {
           // Remove tooltips
+          crosshair: {
+            color: "#000",
+
+            sync: {
+              enabled: false,
+            },
+            zoom: {
+              enabled: false,
+            },
+            snap: {
+              enabled: false,
+            },
+          },
           tooltip: {
+            // titleFont: {
+            //   size: 100,
+            // },
+            bodyFont: {
+              size: 20,
+            },
+            displayColors: false,
+            mode: "index",
+            intersect: false,
             callbacks: {
               title: function () {},
             },
+          },
+          hover: {
+            intersect: true,
           },
           // Remove legend
           legend: {

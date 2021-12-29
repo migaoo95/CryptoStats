@@ -38,3 +38,7 @@ function sortDataGrow(arr) {
   });
   return sortCoinss;
 }
+// UpperCase first coin letter ----------------------- { Capitalize }
+function coinCapitalized(coin) {
+  return coin.charAt(0).toUpperCase() + coin.slice(1);
+}

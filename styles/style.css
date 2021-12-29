@@ -47,7 +47,7 @@
   overflow-y: auto; */
 }
 .modal-body {
-  max-height: 55vh;
+  max-height: 80vh;
   overflow: auto;
 }
 /* #leaderModal .modal-body {
@@ -58,6 +58,7 @@
 }
 .card-leader {
   cursor: pointer;
+  max-width: 200px !important;
 }
 #d-image {
   margin-top: -5px;

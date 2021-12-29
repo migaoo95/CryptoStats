@@ -19,6 +19,11 @@ class DomUI {
   }
   //   ---------------------------------- { WatchList }
   watchList(target) {
+    // const watchListTokens = document.querySelectorAll("#leaderCard");
+    // console.log(watchListTokens);
+    // watchListTokens.forEach(token => {
+    //   if(token == )
+    // })
     if (target.classList.contains("starActive")) {
       target.classList.remove("starActive");
     } else {
@@ -44,9 +49,6 @@ class DomUI {
       tokenClass = "";
     }
     // DOM Output -------- { Output }
-    const coinCapitalized =
-      currency.id.charAt(0).toUpperCase() + currency.id.slice(1);
-
     this.leaderBoard.innerHTML += `
     <div id="leaderCard" class="col-lg-3 col-md-6 mb-5" >
     <div class="card cardDiv">
@@ -62,7 +64,7 @@ class DomUI {
           class="img-fluid rounded-circle w-50 mb-3"
         />
        
-        <h6 class="h6">${coinCapitalized}</h6>
+        <h6 class="h6">${coinCapitalized(currency.id)}</h6>
         <h6 class="h6">${
           currency.current_price
         } <span class="h6 text-success">$</span></h6>
@@ -73,7 +75,7 @@ class DomUI {
         }">${
       Math.round(currency.price_change_percentage_24h * 100) / 100
     }%</span></h6>
-         <h6><span>7d: </span> <span class="${
+         <h6 class="h6"><span class="h6">7d: </span> <span class="${
            currency.price_change_percentage_7d_in_currency >= 0
              ? "text-success"
              : "text-danger"
@@ -218,7 +220,7 @@ class DomUI {
     }</span></div>
     <div class="d-flex">
     <img id="d-image" class="img-fluid" src="${coin.image.small}">
-    <h5 class="pt-2 ml-2">${coin.id}</h5>
+    <h5 class="pt-2 ml-2">${coinCapitalized(coin.id)}</h5>
     <div class="position-relative mt-2">
     <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
     

@@ -6,6 +6,7 @@ const charts = new Charts();
 
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
+  console.log(e.target);
   if (e.target.parentElement.classList.contains("card-leader")) {
     let watchList;
 
@@ -107,7 +108,7 @@ document.getElementById("ranking").addEventListener("change", (e) => {
       charts.generateCharts(data.marketDataJson);
     });
 });
-// Watchlist event -------------------------- { Add WatchList }
+// Watchlist event for LeaderBoard -------------------------- { WatchList LeaderBoard }
 document.getElementById("row").addEventListener("click", (e) => {
   if (e.target.classList.contains("star")) {
     storage.addCoinToStorage(
@@ -161,8 +162,25 @@ document.getElementById("leaderModal").addEventListener("click", (e) => {
   console.log(e.target);
 });
 
-// Change Time Stamp Click Event ----------------------- { TimeStamp }
+// LeaderBoard Modal Click Event ----------------------- { TimeStamp, Watchlist }
 document.getElementById("lModalBody").addEventListener("click", (e) => {
+  // Update Watchlist  ---- { WatchList }
+  if (e.target.id == "starModal") {
+    let toeknTarget;
+    const watchListTokens = document.querySelectorAll("#leaderCard");
+    watchListTokens.forEach((token) => {
+      if (
+        token.firstElementChild.children[1].children[1].textContent ==
+        e.target.parentElement.parentElement.children[1].textContent
+      ) {
+        domUi.watchList(token.firstElementChild.children[0].children[1]);
+      }
+    });
+    storage.addCoinToStorage(
+      e.target.parentElement.parentElement.children[1].textContent
+    );
+    domUi.watchList(e.target);
+  }
   // Copy Currency Address to ClipBoard ----
   if (e.target.id == "iconC") {
     const clip = document.createElement("input");
@@ -193,7 +211,7 @@ document.getElementById("lModalBody").addEventListener("click", (e) => {
   }
 });
 // Copy to Clipboard --------------------- { ClipBoard }
-document.getElementById("iconC");
+// document.getElementById("iconC");
 // document.getElementById("closeModal").addEventListener("click", () => {
 //   domUi.refreshLeader();
 // });
@@ -206,3 +224,36 @@ document.getElementById("iconC");
 //   console.log(result, "%");
 // }
 // calculateProcent(total, amount);
+//////
+// const date = new Date();
+// let day = 6;
+// const days = [
+//   "Sunday",
+//   "Monday",
+//   "Tuseday",
+//   "Wenesday",
+//   "Thursday",
+//   "Friday",
+//   "Saturday",
+// ];
+// const days2 = [
+//   "Sunday",
+//   "Saturday",
+//   "Friday",
+//   "Thursday",
+//   "Wenesday",
+//   "Tuseday",
+//   "Monday",
+// ];
+// const reversed = days.reverse();
+// console.log("Reversed", reversed);
+// // console.log(days[day], day);
+// for (let i = day; i < 7 + day; i++) {
+//   //   console.log(days[i], i);
+//   if (days[i] == undefined) {
+//     days[i] = days2[i - 7 + 1];
+//     console.log(days[i], [i]);
+//   } else {
+//     console.log(days[i], i);
+//   }
+// }
