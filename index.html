@@ -38,7 +38,7 @@
         <!-- Main Container -->
         <div id="body" class="col py-3">
             <!-- GAINERS -->
-            <div class="container"> <div class="row mb-4">
+            <div  class="container"> <div class="row mb-4" >
                 <div class="col-6">
                     <div class="card">
                         <div class="d-flex align-items-center card-header">
@@ -47,7 +47,7 @@
                             <h6 class="pt-2">Biggest Gainers</h6><a  data-toggle="modal"
                             data-target="#myModal" id="linkMore" class="ml-auto text-primary gLink" href="#">more <i class="fas fa-arrow-circle-right"></i></a></div>
                         <div class="card-body p-1">
-                            <table class="table table-borderless">
+                            <table id="gLModal" class="table table-borderless table-hover">
                                 <tbody id="gainersTable"></tbody>
                             </table>
                         </div></div>
@@ -59,7 +59,7 @@
                         <div class="d-flex align-items-center card-header"> <i style="vertical-align: middle;" class="text-danger pr-3 fas fa-skull-crossbones fa-2x"></i><h6 class="pt-2">Biggest Losers</h6><a data-toggle="modal"
                             data-target="#myModal" id="linkMore" class="ml-auto text-primary lLink" href="#">more <i class="fas fa-arrow-circle-right"></i></a></div>
                         <div class="card-body p-1">
-                            <table class="table table-borderless">
+                            <table id="gLModal" class="table table-borderless table-hover">
                                 <tbody id="losersTable"></tbody>
                             </table>
                         </div>
@@ -69,14 +69,14 @@
                  <!-- MODAL GAINERS / LOSERS -->
                  <div class="modal" id="myModal">
                     <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
+                      <div class="modal-content modal-lg-content">
                         <div class="modal-header">
                          
                           <button class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <!-- Modal Content -->
                         <div class="modal-body">
-                            <table class="table table-borderless">
+                            <table  class="table table-borderless table-hover">
                                 <tbody id="modalTable"></tbody>
                             </table>
                         </div>

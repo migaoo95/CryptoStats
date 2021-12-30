@@ -100,16 +100,17 @@ class DomUI {
   // Display loosers Table ---------------------------------- { Loosers }
   displayLoosers(crypto, indexItem) {
     this.losers.innerHTML += `
-    <tr>
+    <tr id="tableRow" data-toggle="modal"
+    data-target="#leaderModal">
   
-    <td><span class="mr-3 text-muted">${
+    <td id="tableData"><span class="mr-3 text-muted">${
       indexItem + 1
     }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
       crypto.image
-    }">${
+    }"><span>${
       crypto.id
-    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
-    <td><span class="${
+    } </span><span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
+    <td id="tableData"><span id="spanPro" class="${
       crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
     }">${
       Math.round(crypto.price_change_percentage_24h * 100) / 100
@@ -120,16 +121,17 @@ class DomUI {
   // Display gainers Table ---------------------------------- { Gainers }
   displayGainers(crypto, indexItem) {
     this.gainers.innerHTML += `
-    <tr>
+    <tr id="tableRow" data-toggle="modal"
+    data-target="#leaderModal">
 
-    <td><span class="mr-3 text-muted">${
+    <td id="tableData"><span class="mr-3 text-muted">${
       indexItem + 1
     }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
       crypto.image
-    }">${
+    }"><span>${
       crypto.id
-    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
-    <td><span class="${
+    } </span><span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
+    <td id="tableData"><span id="spanPro" class="${
       crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
     }">${
       Math.round(crypto.price_change_percentage_24h * 100) / 100
@@ -156,16 +158,17 @@ class DomUI {
   // Display in Modal ---------------------------------- { Modal }
   displayInModal(crypto, indexItem, gainers, losers) {
     this.modalTable.innerHTML += `
-    <tr>
+    <tr id="tableRow" data-toggle="modal"
+    data-target="#leaderModal">
 
-    <td><span class="mr-3 text-muted">${
+    <td id="tableData"><span class="mr-3 text-muted">${
       indexItem + 1
     }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
       crypto.image
-    }">${
+    }"><span>${
       crypto.id
-    } <span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
-    <td><span class="${
+    } </span><span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
+    <td id="tableData"><span id="spanPro" class="${
       crypto.price_change_percentage_24h >= 0 ? "text-success" : "text-danger"
     }">${
       Math.round(crypto.price_change_percentage_24h * 100) / 100
@@ -324,9 +327,9 @@ class DomUI {
             data-parent="#accordion"
             data-toggle="collapse"
           >
-           About <span class="acc">${
+           Read More About  <span class="acc">${coinCapitalized(
              coin.id
-           } <i id="accArrow" class="acc fas fa-arrow-alt-circle-right"></i></span>
+           )} </span>
           </a>
         </h5>
       </div>

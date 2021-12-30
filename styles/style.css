@@ -46,6 +46,9 @@
   /* overflow: auto;
   overflow-y: auto; */
 }
+.modal-lg-content {
+  max-height: 60vh;
+}
 .modal-body {
   max-height: 80vh;
   overflow: auto;
@@ -58,7 +61,7 @@
 }
 .card-leader {
   cursor: pointer;
-  max-width: 200px !important;
+  /* max-width: 200px !important; */
 }
 #d-image {
   margin-top: -5px;
@@ -78,4 +81,9 @@
 }
 #proBoxSmall {
   font-size: 12px !important;
+}
+#gainersTable,
+#losersTable,
+#modalTable {
+  cursor: pointer;
 }

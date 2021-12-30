@@ -6,7 +6,7 @@ const charts = new Charts();
 
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
-  console.log(e.target);
+  //   console.log(e.target);
   if (e.target.parentElement.classList.contains("card-leader")) {
     let watchList;
 
@@ -147,21 +147,6 @@ document.querySelectorAll("#linkMore").forEach((link) => {
   });
 });
 
-// Simple Accordion anim ----------------------- { Accordion }
-document.getElementById("leaderModal").addEventListener("click", (e) => {
-  if (e.target.classList.contains("acc")) {
-    document.getElementById("accArrow").className =
-      "fas fa-arrow-alt-circle-down";
-    e.target.classList.remove("acc");
-  } else {
-    document.getElementById("accArrow").className =
-      "fas fa-arrow-alt-circle-right";
-    e.target.classList.add("acc");
-  }
-
-  console.log(e.target);
-});
-
 // LeaderBoard Modal Click Event ----------------------- { TimeStamp, Watchlist }
 document.getElementById("lModalBody").addEventListener("click", (e) => {
   // Update Watchlist  ---- { WatchList }
@@ -210,50 +195,43 @@ document.getElementById("lModalBody").addEventListener("click", (e) => {
     // e.target.parentElement.parentElement.children[0].textContent
   }
 });
-// Copy to Clipboard --------------------- { ClipBoard }
-// document.getElementById("iconC");
-// document.getElementById("closeModal").addEventListener("click", () => {
-//   domUi.refreshLeader();
-// });
-// // Calculator
-// let total = 3000;
-// let amount = 100;
+// Gainers Loosers Table ------------------------------- { Gainers / Losers Modal }
+document.querySelectorAll("#gLModal").forEach((table) => {
+  table.addEventListener("click", (e) => {
+    let coinName;
+    if (e.target.id == "spanPro") {
+      coinName =
+        e.target.parentElement.parentElement.children[0].children[2]
+          .textContent;
+    } else if (e.target.tagName == "SPAN" || e.target.tagName == "IMG") {
+      coinName = e.target.parentElement.children[2].textContent;
+    } else if (e.target.tagName == "TD") {
+      coinName = e.target.children[2].textContent;
+    }
+    //   console.log(coinName.length, coinName.trim());
+    marketApi.getCoinData(coinName.trim()).then((data) => {
+      console.log(data.coinDataJson);
+      domUi.leaderModal(data.coinDataJson);
+      charts.generateSingleChart(data.coinChartJson);
+    });
+  });
+});
 
-// function calculateProcent(total, amount) {
-//   const result = (amount / total) * 100;
-//   console.log(result, "%");
-// }
-// calculateProcent(total, amount);
-//////
-// const date = new Date();
-// let day = 6;
-// const days = [
-//   "Sunday",
-//   "Monday",
-//   "Tuseday",
-//   "Wenesday",
-//   "Thursday",
-//   "Friday",
-//   "Saturday",
-// ];
-// const days2 = [
-//   "Sunday",
-//   "Saturday",
-//   "Friday",
-//   "Thursday",
-//   "Wenesday",
-//   "Tuseday",
-//   "Monday",
-// ];
-// const reversed = days.reverse();
-// console.log("Reversed", reversed);
-// // console.log(days[day], day);
-// for (let i = day; i < 7 + day; i++) {
-//   //   console.log(days[i], i);
-//   if (days[i] == undefined) {
-//     days[i] = days2[i - 7 + 1];
-//     console.log(days[i], [i]);
-//   } else {
-//     console.log(days[i], i);
-//   }
-// }
+// Gainers Loosers Table ------------------------------- { Gainers / Losers Modal out Modal }
+document.getElementById("modalTable").addEventListener("click", (e) => {
+  let coinName;
+  if (e.target.id == "spanPro") {
+    coinName =
+      e.target.parentElement.parentElement.children[0].children[2].textContent;
+  } else if (e.target.tagName == "SPAN" || e.target.tagName == "IMG") {
+    coinName = e.target.parentElement.children[2].textContent;
+  } else if (e.target.tagName == "TD") {
+    coinName = e.target.children[2].textContent;
+  }
+  //   console.log(coinName.length, coinName.trim());
+  marketApi.getCoinData(coinName.trim()).then((data) => {
+    console.log(data.coinDataJson);
+    domUi.leaderModal(data.coinDataJson);
+    charts.generateSingleChart(data.coinChartJson);
+  });
+});
