@@ -12,6 +12,8 @@ class DomUI {
     // this.leaderModalTitle = document.getElementById("modal-title");
     this.leaderModalBody = document.getElementById("lModalBody");
     this.leaderModalHeader = document.getElementById("lModalHeader");
+    this.globalData = document.getElementById("globalDataDiv");
+    this.searchBoxContainer = document.getElementById("searchBoxContainer");
   }
   // Update leaderboard
   refresh() {
@@ -19,11 +21,6 @@ class DomUI {
   }
   //   ---------------------------------- { WatchList }
   watchList(target) {
-    // const watchListTokens = document.querySelectorAll("#leaderCard");
-    // console.log(watchListTokens);
-    // watchListTokens.forEach(token => {
-    //   if(token == )
-    // })
     if (target.classList.contains("starActive")) {
       target.classList.remove("starActive");
     } else {
@@ -36,25 +33,15 @@ class DomUI {
   }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
-    // Assign Class Name -------- { ClassName }
-    const store = new Store();
-    let tokenClass;
-    const storedCoins = storage.getStoredData();
-    const lowerCasedCoins = storedCoins.map((coin) => {
-      return coin.toLowerCase();
-    });
-    if (lowerCasedCoins.includes(currency.id)) {
-      tokenClass = "starActive";
-    } else {
-      tokenClass = "";
-    }
     // DOM Output -------- { Output }
     this.leaderBoard.innerHTML += `
     <div id="leaderCard" class="col-lg-3 col-md-6 mb-5" >
-    <div class="card cardDiv">
+    <div class="card shadow-sm cardDiv">
    <div class="d-flex justify-content-between position-absolute w-100">
     <h6 class="h6 m-1 p-1">${index + 1}</h6>
-    <i style="vertical-align: middle; font-size:20px;" class="${tokenClass} star far fa-star mt-1 p-1 text-muted"></i>
+    <i style="vertical-align: middle; font-size:20px;" class="${storedCoinsClass(
+      currency.id
+    )} star far fa-star mt-1 p-1 text-muted"></i>
     </div>
       <div data-toggle="modal"
       data-target="#leaderModal" class="card-leader card-body text-center">
@@ -208,7 +195,6 @@ class DomUI {
 
   // LeaderBoard Modal ---------------------------------- { Leader Modal }
   leaderModal(coin) {
-    // console.log(coin.image);
     this.leaderModalHeader.innerHTML = `
     <h4 class="">${
       coin.id
@@ -217,7 +203,7 @@ class DomUI {
     this.leaderModalBody.innerHTML = `
   <div class="row">
     <div class="col-6 px-5">
-    <div class="mb-3">
+    <div class="mb-3 ">
     <span class="bg-dark p-1 rounded text-white">Rank #${
       coin.market_cap_rank
     }</span></div>
@@ -228,7 +214,9 @@ class DomUI {
     <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
     
     </div>
-    <span><i id="starModal" style="vertical-align: middle; font-size:20px;" class="star far fa-star mt-1 ml-1 p-1 text-muted"></i></span>
+    <span><i id="starModal" style="vertical-align: middle; font-size:20px;" class="${storedCoinsClass(
+      coin.id
+    )} star far fa-star mt-1 ml-1 p-1 text-muted"></i></span>
     </div>
 
     <div class="d-flex">
@@ -343,5 +331,39 @@ class DomUI {
   </div>
    </div>
     `;
+  }
+  // Global Cryptocurrency Information ---------------------------- { Global }
+  displayGlobalData(data) {
+    console.log("Dom Global", data);
+    this.globalData.innerHTML = `
+    <h6><i class="fas fa-coins"></i> Currencies: <span class="text-info">${
+      data.data.active_cryptocurrencies
+    }</span></h6>
+    <h6><i class="fas fa-poll"></i> Total Market Cap: <span class="text-info">$${Math.round(
+      data.data.total_market_cap.usd
+    )}</span></h6>
+    <h6><i class="fas fa-cubes"></i> Exchanges: <span class="text-info">${
+      data.data.markets
+    }</span></h6>
+    
+    `;
+  }
+  // Search Box  ---------------------------- { Search }
+  displaySearch(crypto) {
+    this.searchBoxContainer.innerHTML += `
+    <tr  id="allTr" class="trel bg-secondary text-white" data-toggle="modal"
+    data-target="#leaderModal">
+
+    <td id="searchBoxZ"><h5 class="ml-2"> <span class="h5el">${
+      crypto.id
+    } </span> <span class="spanel text-info">${crypto.symbol.toUpperCase()}</span></h5></td>
+   
+    </tr>
+    `;
+
+    // console.log(this.searchBoxContainer);
+  }
+  hideSearch() {
+    this.searchBoxContainer.innerHTML = "";
   }
 }

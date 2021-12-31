@@ -1,6 +1,6 @@
 class ApiData {
   constructor(currencyName) {
-    this.topTwoHundred = 250;
+    this.topTwoHundred = 200;
     this.defaultRanking = 10;
     this.ranking = this.defaultRanking;
     this.chartTimeStamp = this.chartTimeStamp;
@@ -23,13 +23,17 @@ class ApiData {
     const marketDataResponseAll = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${this.topTwoHundred}&page=1&sparkline=false`
     );
+    const globalMarketDataResponse =
+      await fetch(`https://api.coingecko.com/api/v3/global
+    `);
 
     const marketDataJson = await marketDataResponse.json();
     const marketDataJsonAll = await marketDataResponseAll.json();
-
+    const globalDataJson = await globalMarketDataResponse.json();
     return {
       marketDataJson,
       marketDataJsonAll,
+      globalDataJson,
     };
   }
   async getCoinData(coin) {

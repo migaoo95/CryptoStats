@@ -1,9 +1,7 @@
 /* #body {
   background-color: rgb(46, 71, 109);
 } */
-#row .card {
-  /* cursor: pointer; */
-}
+
 #row .card:hover {
   background: #b8b6c4;
   color: white;
@@ -85,5 +83,25 @@
 #gainersTable,
 #losersTable,
 #modalTable {
+  cursor: pointer;
+}
+/* #searchBoxZ {
+  z-index: 10 !important;
+}
+#zIndexboxx {
+  z-index: 20 !important;
+  margin-top: 35px;
+} */
+#zIndexSearch {
+  z-index: 10;
+  /* max-height: 50vh; */
+  /* overflow: auto; */
+}
+#searchBoxContainer {
+  max-height: 20vh;
+  overflow: auto;
+  width: 58% !important;
+  margin-top: -16px;
+  border-radius: 0px 0px 10px 10px;
   cursor: pointer;
 }

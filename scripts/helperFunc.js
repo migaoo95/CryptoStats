@@ -42,3 +42,16 @@ function sortDataGrow(arr) {
 function coinCapitalized(coin) {
   return coin.charAt(0).toUpperCase() + coin.slice(1);
 }
+// WatchList Class for Local Storage Coins ------------------- { WatchList }
+function storedCoinsClass(coin) {
+  let tokenClass;
+  const storedCoins = storage.getStoredData();
+  const lowerCasedCoins = storedCoins.map((coin) => {
+    return coin.toLowerCase();
+  });
+  if (lowerCasedCoins.includes(coin)) {
+    return (tokenClass = "starActive");
+  } else {
+    return (tokenClass = "");
+  }
+}

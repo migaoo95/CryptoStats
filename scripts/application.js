@@ -50,14 +50,14 @@ document.querySelector(".row").addEventListener("click", (e) => {
         domUi.leaderModal(data.coinDataJson);
         charts.generateSingleChart(data.coinChartJson);
         console.log("Coin Data", data.coinDataJson);
-        return e.target.parentElement.children[1].children[1].textContent;
+        // return e.target.parentElement.children[1].children[1].textContent;
         // console.log(data.coinDataJson);
-      })
-      .then((data) => {
-        if (storage.getStoredData().includes(data)) {
-          document.getElementById("starModal").classList.add("starActive");
-        }
       });
+    //   .then((data) => {
+    //     if (storage.getStoredData().includes(data)) {
+    //       document.getElementById("starModal").classList.add("starActive");
+    //     }
+    //   });
   }
   //   console.log(e.target.parentElement);
 });
@@ -66,7 +66,10 @@ document.querySelector(".row").addEventListener("click", (e) => {
 marketApi
   .getData()
   .then((data) => {
-    console.log(data.marketDataJson);
+    console.log("Market Data", data.marketDataJson);
+    // console.log("Global Data", data.globalDataJson);
+    // Display global Data ------------------------ { Global Data }
+    domUi.displayGlobalData(data.globalDataJson);
     const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 3);
     const newSliced = sortDataLow(data.marketDataJsonAll).slice(-3).reverse();
     // SORT GAINERS
@@ -151,6 +154,7 @@ document.querySelectorAll("#linkMore").forEach((link) => {
 document.getElementById("lModalBody").addEventListener("click", (e) => {
   // Update Watchlist  ---- { WatchList }
   if (e.target.id == "starModal") {
+    console.log("This el", e.target);
     let toeknTarget;
     const watchListTokens = document.querySelectorAll("#leaderCard");
     watchListTokens.forEach((token) => {
@@ -234,4 +238,110 @@ document.getElementById("modalTable").addEventListener("click", (e) => {
     domUi.leaderModal(data.coinDataJson);
     charts.generateSingleChart(data.coinChartJson);
   });
+});
+// Search Box ------------------------------ { Search Box }
+let coinArr = [];
+marketApi.getData().then((data) => {
+  // console.log(data.marketDataJsonAll);
+  data.marketDataJsonAll.forEach((coin) => {
+    coinArr.push(coin);
+  });
+  document.getElementById("searchBox", searchCoins(coinArr));
+});
+function searchCoins(coinArr) {
+  coinArr.forEach((coin) => {
+    domUi.displaySearch(coin);
+  });
+}
+const tableNone = document.getElementById("tableNone");
+document.getElementById("searchBox").addEventListener("keyup", (e) => {
+  if (e.target.value != "") {
+    tableNone.setAttribute("class", "");
+    document.querySelectorAll("#allTr").forEach((el) => {
+      if (el.textContent.indexOf(e.target.value) != -1) {
+        el.style.display = "block";
+      } else {
+        el.style.display = "none";
+      }
+    });
+    // console.log(tableNone);
+  } else {
+    tableNone.setAttribute("class", "d-none");
+  }
+
+  //   console.log(e.target);
+});
+// coinArr.forEach((coin) => {
+//   console.log(coin);
+// });
+// document.getElementById("searchBox").addEventListener("focus", (e) => {
+//   marketApi.getData().then((data) => {
+//     // console.log(data.marketDataJsonAll);
+//     data.marketDataJsonAll.forEach((coin) => {
+//       domUi.displaySearch(coin.id, "block");
+//     });
+//     e.target.addEventListener("keyup", (e) => {
+//       document.querySelectorAll("#searchBoxZ").forEach((el) => {
+//         if (e.target.value != "") {
+//           if (el.textContent.indexOf(e.target.value.trim()) != -1) {
+//             el.style.display = "block";
+//           } else {
+//             el.style.display = "none";
+//           }
+//         } else {
+//           document.querySelectorAll("#searchBoxZ").forEach((el) => {
+//             el.style.display = "none";
+//           });
+//           console.log("empty");
+//           // domUi.hideSearch();
+//         }
+//       });
+//       // document.getElementById("searchBoxContainer").innerHTML = "";
+
+//       //   console.log(document.querySelectorAll("#searchBoxZ"));
+//     });
+//   });
+// });
+// domUi.displaySearch(e.target.value);
+//   } else {
+//     // domUi.hideSearch();
+//   }
+// const element = document.getElementById("searchBox");
+// element.addEventListener('click')
+// if (element.activeElement) {
+//   console.log("yyyyyeheh");
+// } else {
+//   console.log("sadsda");
+// }
+document.addEventListener("click", () => {
+  if (document.activeElement) {
+    tableNone.setAttribute("class", "d-none");
+    document.getElementById("searchBox").value = "";
+  } else {
+    console.log("wyf");
+  }
+});
+
+document.getElementById("tableNone").addEventListener("click", (e) => {
+  let singleCoinSearch;
+  if (e.target.classList.contains("h5el")) {
+    singleCoinSearch = e.target.textContent;
+    // console.log(e.target.textContent);
+  } else if (e.target.classList.contains("spanel")) {
+    singleCoinSearch = e.target.parentElement.children[0].textContent;
+    // console.log(e.target.parentElement.children[0].textContent);
+  } else if (e.target.classList.contains("trel")) {
+    singleCoinSearch =
+      e.target.firstElementChild.firstElementChild.firstElementChild
+        .textContent;
+    // console.log(
+    //   e.target.firstElementChild.firstElementChild.firstElementChild.textContent
+    // );
+  }
+  marketApi.getCoinData(singleCoinSearch.trim()).then((data) => {
+    // console.log(data.coinDataJson);
+    domUi.leaderModal(data.coinDataJson);
+    charts.generateSingleChart(data.coinChartJson);
+  });
+  // console.log(e.target);
 });
