@@ -62,8 +62,10 @@ function watchListShared(e) {
       e.target.parentElement.parentElement.children[1].textContent
     );
     domUi.watchList(e.target);
-    domUi.clearLeader(); // Refresh LeaderBoard
-    showWatchlistTokens(); // Redraw LeaderBoard
+    if (!window.location.pathname.includes("/index.html")) {
+      domUi.clearLeader(); // Refresh LeaderBoard
+      showWatchlistTokens(); // Redraw LeaderBoard
+    }
   }
   // Copy Currency Address to ClipBoard ----
   if (e.target.id == "iconC") {
@@ -105,8 +107,10 @@ function singleCoinWatch(e, page) {
       console.log("dash");
     } else {
       console.log("watch", e.target.parentElement.parentElement);
+
       domUi.clearLeader(); // Refresh LeaderBoard
       showWatchlistTokens();
     }
   }
 }
+console.log(window.location.pathname);
