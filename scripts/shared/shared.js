@@ -1,8 +1,8 @@
+// Display All Currency Data In Modal --------------------
 function modalShared(e) {
   //   console.log(e.target);
   if (e.target.parentElement.classList.contains("card-leader")) {
     let watchList;
-
     marketApi
       .getCoinData(e.target.parentElement.children[1].textContent.toLowerCase())
       .then((data) => {
@@ -10,7 +10,6 @@ function modalShared(e) {
         charts.generateSingleChart(data.coinChartJson);
         console.log("Coin Data", data.coinDataJson);
         return e.target.parentElement.children[1].textContent;
-        // console.log(data.coinDataJson);
       })
       .then((data) => {
         if (storage.getStoredData().includes(data)) {
@@ -27,7 +26,6 @@ function modalShared(e) {
         charts.generateSingleChart(data.coinChartJson);
         console.log("Coin Data", data.coinDataJson);
         return e.target.parentElement.parentElement.children[1].textContent;
-        // console.log(data.coinDataJson);
       })
       .then((data) => {
         if (storage.getStoredData().includes(data)) {
@@ -43,16 +41,8 @@ function modalShared(e) {
         domUi.leaderModal(data.coinDataJson);
         charts.generateSingleChart(data.coinChartJson);
         console.log("Coin Data", data.coinDataJson);
-        // return e.target.parentElement.children[1].children[1].textContent;
-        // console.log(data.coinDataJson);
       });
-    //   .then((data) => {
-    //     if (storage.getStoredData().includes(data)) {
-    //       document.getElementById("starModal").classList.add("starActive");
-    //     }
-    //   });
   }
-  //   console.log(e.target.parentElement);
 }
 function watchListShared(e) {
   // Update Watchlist  ---- { WatchList }
@@ -72,6 +62,8 @@ function watchListShared(e) {
       e.target.parentElement.parentElement.children[1].textContent
     );
     domUi.watchList(e.target);
+    domUi.clearLeader(); // Refresh LeaderBoard
+    showWatchlistTokens(); // Redraw LeaderBoard
   }
   // Copy Currency Address to ClipBoard ----
   if (e.target.id == "iconC") {
@@ -102,7 +94,7 @@ function watchListShared(e) {
     // e.target.parentElement.parentElement.children[0].textContent
   }
 }
-// Row element watchlist ---------
+// SingleCoin => Clear LeaderBoard, Redraw LeaderBoard, Store Coin in LS  --------------- { Single Coin }
 function singleCoinWatch(e, page) {
   if (e.target.classList.contains("star")) {
     storage.addCoinToStorage(
@@ -113,8 +105,8 @@ function singleCoinWatch(e, page) {
       console.log("dash");
     } else {
       console.log("watch", e.target.parentElement.parentElement);
-      domUi.clearLeader();
-      globalTest();
+      domUi.clearLeader(); // Refresh LeaderBoard
+      showWatchlistTokens();
     }
   }
 }

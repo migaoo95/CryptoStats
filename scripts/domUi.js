@@ -27,12 +27,14 @@ class DomUI {
       target.classList.add("starActive");
     }
   }
-  // Check THis -------------------------- { CHECK }  -------
-  watchListClasses(allTokens) {
-    // console.log(allTokens);
-  }
+
+  // Clear LeaderBoard on Delete from Watchlist -------------------- { Clear LeaderBoard }
   clearLeader() {
     this.leaderBoard.innerHTML = "";
+  }
+  // Show Message
+  showMsg(msg) {
+    this.leaderBoard.innerHTML = `<h4 class=" text-center  ">Sorry, your watchlist is currently empty. You can start choosing your faviorite cryptocurrencies from the dashboard by pressing a star icon <span><i class="text-warning far fa-star"></i></span></h4>`;
   }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
