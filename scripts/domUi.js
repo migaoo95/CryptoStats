@@ -1,5 +1,5 @@
-// Init Storage ----
-const storageDom = new Store();
+// // Init Storage ----
+// const storageDom = new Store();
 // Class
 class DomUI {
   constructor() {
@@ -31,6 +31,9 @@ class DomUI {
   watchListClasses(allTokens) {
     // console.log(allTokens);
   }
+  clearLeader() {
+    this.leaderBoard.innerHTML = "";
+  }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
     // DOM Output -------- { Output }
@@ -38,7 +41,7 @@ class DomUI {
     <div id="leaderCard" class="col-lg-3 col-md-6 mb-5" >
     <div class="card shadow-sm cardDiv">
    <div class="d-flex justify-content-between position-absolute w-100">
-    <h6 class="h6 m-1 p-1">${index + 1}</h6>
+    <h6 class="h6 m-1 p-1">${currency.market_cap_rank}</h6>
     <i style="vertical-align: middle; font-size:20px;" class="${storedCoinsClass(
       currency.id
     )} star far fa-star mt-1 p-1 text-muted"></i>
@@ -192,6 +195,7 @@ class DomUI {
   //   this.leaderModalHeader.innerHTML = "";
   //   this.leaderModalBody.innerHTML = "";
   // }
+  // LeaderBoard Modal ---------------------------------- { Leader Modal }
 
   // LeaderBoard Modal ---------------------------------- { Leader Modal }
   leaderModal(coin) {

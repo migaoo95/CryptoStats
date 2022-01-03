@@ -41,11 +41,10 @@
                 text-white text-decoration-none
               "
             >
-              <span class="fs-5 d-none d-sm-inline">Crypto Stats</span>
+              <span class="fs-5 d-sm-inline">Crypto Stats</span>
             </a>
             <ul
               class="
-                d-none
                 nav nav-pills
                 flex-column
                 mb-sm-auto mb-0
@@ -54,16 +53,22 @@
               id="menu"
             >
               <li class="nav-item">
-                <a href="#" class="text-white nav-link align-middle px-1">
-                  <i class="fa fa-bitcoin fa-2x pr-3"></i>
-                  <span class="ms-1 d-none d-sm-inline">Currencies</span>
+                <a
+                  href="index.html"
+                  class="text-white nav-link align-middle px-1"
+                >
+                  <i class="fa fa-tachometer fa-2x pr-2"></i>
+                  <span class="ms-1 d-sm-inline">Dashboard</span>
                 </a>
               </li>
 
               <li>
-                <a href="#ss" class="text-white nav-link px-0 align-middle">
-                  <i class="fa fa-tachometer fa-2x pr-2"></i>
-                  <span class="ms-1 d-none d-sm-inline">Dashboard</span></a
+                <a
+                  href="pages/watchlist.html"
+                  class="text-white nav-link px-0 align-middle"
+                >
+                  <i class="far fa-star fa-2x"></i>
+                  <span class="ms-1 d-none d-sm-inline">Watchlist</span></a
                 >
               </li>
             </ul>
@@ -270,6 +275,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <!-- SCRIPTS -->
+    <script src="scripts/shared/shared.js"></script>
     <script src="scripts/charts.js"></script>
     <script src="scripts/localStorage.js"></script>
     <script src="scripts/domUi.js"></script>
