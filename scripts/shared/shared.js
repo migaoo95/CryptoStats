@@ -114,3 +114,36 @@ function singleCoinWatch(e, page) {
   }
 }
 console.log(window.location.pathname);
+
+// Unclick Search Box resultys ----------------------- { Search Results }
+function searchResults() {
+  document.addEventListener("click", () => {
+    if (document.activeElement) {
+      tableNone.setAttribute("class", "d-none");
+      document.getElementById("searchBox").value = "";
+    } else {
+      console.log("wyf");
+    }
+  });
+}
+// Display Search Results ----------------------- { Search Results }
+function displaySearchResults() {
+  const tableNone = document.getElementById("tableNone");
+  document.getElementById("searchBox").addEventListener("keyup", (e) => {
+    if (e.target.value != "") {
+      tableNone.setAttribute("class", "");
+      document.querySelectorAll("#allTr").forEach((el) => {
+        if (el.textContent.indexOf(e.target.value) != -1) {
+          el.style.display = "block";
+        } else {
+          el.style.display = "none";
+        }
+      });
+      // console.log(tableNone);
+    } else {
+      tableNone.setAttribute("class", "d-none");
+    }
+
+    //   console.log(e.target);
+  });
+}

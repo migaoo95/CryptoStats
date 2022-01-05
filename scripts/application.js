@@ -213,13 +213,11 @@ document.getElementById("searchBox").addEventListener("keyup", (e) => {
 // } else {
 //   console.log("sadsda");
 // }
+// Display Search Results  ------------------ { shared.js }
+displaySearchResults();
+// Clear Search Result on Click out ------------------ { shared.js }
 document.addEventListener("click", () => {
-  if (document.activeElement) {
-    tableNone.setAttribute("class", "d-none");
-    document.getElementById("searchBox").value = "";
-  } else {
-    console.log("wyf");
-  }
+  searchResults();
 });
 
 document.getElementById("tableNone").addEventListener("click", (e) => {

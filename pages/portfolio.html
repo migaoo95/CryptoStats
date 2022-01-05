@@ -88,8 +88,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex">
-                        <i class="text-warning far fa-star fa-3x"></i>
-                        <h4 id="watchListText" class="text-info ml-2"> Your Watchlist</h4>
+                        <i class="fas fa-wallet fa-3x"></i>
+                        <h4 id="watchListText" class="text-info ml-2"> Assets Portfolio</h4>
                         <div class="ml-auto mt-2 d-flex">
                             <i class="fas fa-coins fa-2x mr-2"></i>
                         <h4 id="coinCounter" class="text-info"></h4>
@@ -97,21 +97,58 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <button
+                      data-toggle="modal"
+                      data-target="#portfolioModal"
+                      class="btn btn-primary"
+                      href="#"
+                      ><i class="mr-1 fas fa-plus-circle"></i>Add Currency </button>
                   <div class="overflow-scroll card-body" id="cryptoContainer">
                     <div id="row" class="row"></div>
                   </div>
                 </div>
               </div>
               <!-- LeaderBoard Modal -->
-              <div class="modal mr-2" id="leaderModal">
+              <div class="w-100 mr-2" id="portfolioModal">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
-                  <div class="modal-content">
-                    <div id="lModalHeader" class="modal-header">
+                  <div id="porModal" class="modal-content">
+                    <div id="" class="modal-header">
                       <button class="close" data-dismiss="modal">&times;</button>
                     </div>
     
-                    <!-- Modal Content -->
-                    <div id="lModalBody" class="modal-body"></div>
+                    <!-- Modal Body -->
+                    <div id="" class="modal-body">
+
+                        <!-- SEARCH INPUT -->
+                        <div class="row mb-3">
+                            <div class="col-12 d-flex justify-content-center">
+                              <div class="input-group mb-3 w-50 shadow">
+                                <input
+                                  id="searchBox"
+                                  class="form-control"
+                                  type="text"
+                                  placeholder="Currency"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text bg-primary text-white"
+                                    ><i class="fas fa-search-dollar"></i
+                                  ></span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-3"></div>
+                            <!-- SEARCH BOX -->
+                            <div id="zIndexSearch" class="col">
+                              <table id="tableNone" class="d-none border table-hover">
+                                <tbody
+                                  id="searchBoxContainer"
+                                  class="position-absolute"
+                                ></tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div id="portfolioC"></div>
+                    </div>
                     <div class="modal-footer">
                       <button
                         id="closeModal"
@@ -134,20 +171,20 @@
       referrerpolicy="no-referrer"
     ></script>
     <!-- SCRIPTS -->
+    <!-- <script src="../scripts/shared/shared.js"></script>
+    <script src="../scripts/charts.js"></script>
+    <script src="../scripts/localStorage.js"></script>
+    <script src="../scripts/domUi.js"></script>
+    <script src="../scripts/apiData.js"></script>
+    <script src="../scripts/helperFunc.js"></script>
+    <script src="/scripts/watchList/application.js"></script> -->
     <script src="../scripts/shared/shared.js"></script>
     <script src="../scripts/charts.js"></script>
     <script src="../scripts/localStorage.js"></script>
     <script src="../scripts/domUi.js"></script>
     <script src="../scripts/apiData.js"></script>
     <script src="../scripts/helperFunc.js"></script>
-    <script src="/scripts/watchList/application.js"></script>
-    
-    <!-- <script src="scripts/charts.js"></script>
-    <script src="scripts/localStorage.js"></script>
-    <script src="scripts/domUi.js"></script>
-    <script src="scripts/apiData.js"></script>
-    <script src="scripts/helperFunc.js"></script>
-    <script src="scripts/application.js"></script> -->
+    <script src="../scripts/portfolio/application.js"></script>
     <!-- CDNS -->
     <script
       src="https://kit.fontawesome.com/29d490a53c.js"

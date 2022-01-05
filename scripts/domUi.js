@@ -14,6 +14,7 @@ class DomUI {
     this.leaderModalHeader = document.getElementById("lModalHeader");
     this.globalData = document.getElementById("globalDataDiv");
     this.searchBoxContainer = document.getElementById("searchBoxContainer");
+    this.portfolioContainer = document.getElementById("portfolioC");
   }
   // Update leaderboard
   refresh() {
@@ -34,7 +35,7 @@ class DomUI {
   }
   // Show Message
   showMsg(msg) {
-    this.leaderBoard.innerHTML = `<h4 class=" text-center  ">Sorry, your watchlist is currently empty. You can start choosing your faviorite cryptocurrencies from the dashboard by pressing a star icon <span><i class="text-warning far fa-star"></i></span></h4>`;
+    this.leaderBoard.innerHTML = `<h4 class=" text-center  ">Sorry, your watchlist is currently empty. You can start by choosing your faviorite cryptocurrencies from the dashboard by pressing a star icon <span><i class="text-warning far fa-star"></i></span></h4>`;
   }
   // Display Cryptocurrencies on leader board  ---------------------------------- { LeaderBoard }
   createLeaderBoard(currency, index) {
@@ -371,5 +372,61 @@ class DomUI {
   }
   hideSearch() {
     this.searchBoxContainer.innerHTML = "";
+  }
+  // Create Portfolio ----------------------------- { Portfolio }
+  displayPortfolio(coin) {
+    this.portfolioContainer.innerHTML = `
+    <div class="row">
+    <div class="col-12 d-flex justify-content-center mb-2">
+    <div class="btn-toolbar">
+    <div id="btn-group" class="btn-group mr-auto">
+        <button class="btn px-5" type="button"><span class="h6">Buy<span></button>
+        <button class="btn px-5" type="button"><span class="h6">Sell<span></button>
+    </div>
+    </div>
+    </div>
+    <br>
+    <div class="col-6 offset-4 pl-4 mt-3">
+    
+    <div class="d-flex">
+    <img id="d-image" class="img-fluid" src="${coin.image.small}">
+    <h5 class="pt-2 ml-2">${coinCapitalized(coin.id)}</h5>
+    <div class="position-relative mt-2">
+    <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
+    
+      </div>
+     </div>
+     </div>
+     </div>
+    <div class="row container d-flex justify-content-center mt-3">
+    <div class="col-5 pr-1">
+    <div class="form-group">
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="" aria-describedby="quantity" placeholder="0.00">
+    <small id="emailHelp" class="form-text text-muted">What is the amount of coins that you would like to add</small>
+  </div>
+    </div>
+
+
+    <div class="col-5 pl-1">
+  <div class="form-group">
+    <label for="quantity">Price Per Coin</label>
+    <input type="number" class="form-control" id="" aria-describedby="quantity" placeholder="0.00" value="${
+      coin.market_data.current_price.usd
+    }">
+    <small id="emailHelp" class="form-text text-muted">Current price per token</small>
+  </div>
+    </div>
+    
+    <div class="container mt-3 px-5">
+    <div id="totalSpent" class=" p-3 mb-3 rounded">
+    <h6 class="text-muted">Total Spent</h6>
+  
+    <h4>$0</h4>
+    </div>
+    <button class="btn btn-block btn-primary py-2">Add Transaction</button>
+    </div>
+    </div>
+    `;
   }
 }
