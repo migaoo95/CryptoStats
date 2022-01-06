@@ -1,9 +1,11 @@
 class Charts {
   // Generate Charts ------------------------------------ { Charts }
   generateCharts(data) {
+    // console.log("My Dataa", data);
     const canvases = document.querySelectorAll(".canvases");
     // console.log("Data", data);
     canvases.forEach((canvas, index) => {
+      // console.log(canvas.parentElement.children[1].textContent);
       // Price of each coin --------------- {}
       const sevenDayPrice = document
         .getElementById(`myChart${index}`)
@@ -145,6 +147,65 @@ class Charts {
           },
           hover: {
             intersect: true,
+          },
+          // Remove legend
+          legend: {
+            display: false,
+          },
+          // Remove grid
+          gridlines: {
+            display: false,
+          },
+        },
+      },
+    });
+    // console.log(myChart);
+  }
+
+  generateSingleChartTest(coin, canvas, precentage) {
+    let color = precentage > 0 ? "green" : "red";
+    const ctx = canvas;
+
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: coin.prices,
+        datasets: [
+          {
+            label: "# of Votes",
+            data: coin.prices,
+            backgroundColor: [color],
+            borderColor: [color],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        events: [],
+
+        elements: {
+          point: {
+            radius: 0,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            // Hide grid Lines y axis
+            display: false,
+          },
+          // Hide grid Lines x axis
+          x: {
+            display: false,
+          },
+        },
+        plugins: {
+          crosshair: {
+            enabled: false,
+          },
+          // Remove tooltips
+          tooltip: {
+            enabled: false,
           },
           // Remove legend
           legend: {

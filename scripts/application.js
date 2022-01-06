@@ -6,62 +6,10 @@ const charts = new Charts();
 
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
-  //   console.log(e.target);
-  if (e.target.parentElement.classList.contains("card-leader")) {
-    let watchList;
-
-    marketApi
-      .getCoinData(e.target.parentElement.children[1].textContent.toLowerCase())
-      .then((data) => {
-        domUi.leaderModal(data.coinDataJson);
-        charts.generateSingleChart(data.coinChartJson);
-        console.log("Coin Data", data.coinDataJson);
-        return e.target.parentElement.children[1].textContent;
-        // console.log(data.coinDataJson);
-      })
-      .then((data) => {
-        if (storage.getStoredData().includes(data)) {
-          document.getElementById("starModal").classList.add("starActive");
-        }
-      });
-  } else if (e.target.parentElement.classList.contains("h6")) {
-    marketApi
-      .getCoinData(
-        e.target.parentElement.parentElement.children[1].textContent.toLowerCase()
-      )
-      .then((data) => {
-        domUi.leaderModal(data.coinDataJson);
-        charts.generateSingleChart(data.coinChartJson);
-        console.log("Coin Data", data.coinDataJson);
-        return e.target.parentElement.parentElement.children[1].textContent;
-        // console.log(data.coinDataJson);
-      })
-      .then((data) => {
-        if (storage.getStoredData().includes(data)) {
-          document.getElementById("starModal").classList.add("starActive");
-        }
-      });
-  } else if (e.target.parentElement.classList.contains("cardDiv")) {
-    marketApi
-      .getCoinData(
-        e.target.parentElement.children[1].children[1].textContent.toLowerCase()
-      )
-      .then((data) => {
-        domUi.leaderModal(data.coinDataJson);
-        charts.generateSingleChart(data.coinChartJson);
-        console.log("Coin Data", data.coinDataJson);
-        // return e.target.parentElement.children[1].children[1].textContent;
-        // console.log(data.coinDataJson);
-      });
-    //   .then((data) => {
-    //     if (storage.getStoredData().includes(data)) {
-    //       document.getElementById("starModal").classList.add("starActive");
-    //     }
-    //   });
-  }
-  //   console.log(e.target.parentElement);
+  modalShared(e);
 });
-
+//   console.log(e.target.parentElement);
+// watch;
 // Get Api object on load ------------------------- { Promise }
 marketApi
   .getData()
@@ -113,12 +61,8 @@ document.getElementById("ranking").addEventListener("change", (e) => {
 });
 // Watchlist event for LeaderBoard -------------------------- { WatchList LeaderBoard }
 document.getElementById("row").addEventListener("click", (e) => {
-  if (e.target.classList.contains("star")) {
-    storage.addCoinToStorage(
-      e.target.parentElement.nextElementSibling.childNodes[3].textContent
-    );
-    domUi.watchList(e.target.parentElement.children[1]);
-  }
+  let page = "dash";
+  singleCoinWatch(e, page);
 });
 
 // MODAL  ------------------------------- { Event Modal }
@@ -150,55 +94,11 @@ document.querySelectorAll("#linkMore").forEach((link) => {
   });
 });
 
-// LeaderBoard Modal Click Event ----------------------- { TimeStamp, Watchlist }
+// Chart Timestamp, Watchlist in modal, Clipboard ----------------- { Shared }
 document.getElementById("lModalBody").addEventListener("click", (e) => {
-  // Update Watchlist  ---- { WatchList }
-  if (e.target.id == "starModal") {
-    console.log("This el", e.target);
-    let toeknTarget;
-    const watchListTokens = document.querySelectorAll("#leaderCard");
-    watchListTokens.forEach((token) => {
-      if (
-        token.firstElementChild.children[1].children[1].textContent ==
-        e.target.parentElement.parentElement.children[1].textContent
-      ) {
-        domUi.watchList(token.firstElementChild.children[0].children[1]);
-      }
-    });
-    storage.addCoinToStorage(
-      e.target.parentElement.parentElement.children[1].textContent
-    );
-    domUi.watchList(e.target);
-  }
-  // Copy Currency Address to ClipBoard ----
-  if (e.target.id == "iconC") {
-    const clip = document.createElement("input");
-    document.body.appendChild(clip);
-    clip.setAttribute("id", "clip_id");
-    document.getElementById("clip_id").value =
-      e.target.parentElement.firstElementChild.value;
-    clip.select();
-    document.execCommand("copy");
-    document.body.removeChild(clip);
-  }
-  // Darw a Chart inside a modal  -----
-  if (e.target.classList.contains("btnChangeTime")) {
-    marketApi.changeChartTimeStamp(e.target.value);
-    marketApi
-      .getCoinData(e.target.parentElement.parentElement.children[0].textContent)
-      .then((data) => {
-        document.getElementById("myChartBoard").remove();
-        document.getElementById("chartBox").innerHTML =
-          ' <canvas class="canvases" style="cursor: pointer;" id="myChartBoard"></canvas>';
-        return data;
-        // document.getElementById("myChartBoard").innerHTML = "";
-      })
-      .then((data) => {
-        charts.generateSingleChart(data.coinChartJson);
-      });
-    // e.target.parentElement.parentElement.children[0].textContent
-  }
+  watchListShared(e);
 });
+
 // Gainers Loosers Table ------------------------------- { Gainers / Losers Modal }
 document.querySelectorAll("#gLModal").forEach((table) => {
   table.addEventListener("click", (e) => {
@@ -313,13 +213,11 @@ document.getElementById("searchBox").addEventListener("keyup", (e) => {
 // } else {
 //   console.log("sadsda");
 // }
+// Display Search Results  ------------------ { shared.js }
+displaySearchResults();
+// Clear Search Result on Click out ------------------ { shared.js }
 document.addEventListener("click", () => {
-  if (document.activeElement) {
-    tableNone.setAttribute("class", "d-none");
-    document.getElementById("searchBox").value = "";
-  } else {
-    console.log("wyf");
-  }
+  searchResults();
 });
 
 document.getElementById("tableNone").addEventListener("click", (e) => {

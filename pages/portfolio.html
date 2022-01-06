@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../styles/style.css" />
+    <!-- <style>
+      li:hover > i,
+      li:active > i {
+        color: #82888c !important;
+      }
+    </style> -->
+    <title>Crypto Stats</title>
+  </head>
+  <header>
+    <div class="container">
+      <nav
+        id="navigation"
+        class="navbar navbar-expand-lg navbar-light bg-light mb-2 shadow-sm"
+      >
+        <!-- <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+
+        <div class="navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav m-auto">
+            <li class="nav-item d-flex mr-5">
+              <i class="text-primary fa fa-tachometer fa-2x"></i>
+              <a class="nav-link text-primary" href="../index.html"
+                >Dashboard <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item d-flex mr-5">
+              <i class="text-muted far fa-star fa-2x"></i>
+              <a class="nav-link" href="watchlist.html">Watchlist</a>
+            </li>
+
+            <li class="nav-item d-flex">
+              <i class="text-muted fas fa-wallet fa-2x"></i>
+              <a class="nav-link" href="portfolio.html">Portfolio</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <body class="">
+    <!-- Main Container -->
+
+    <div id="body" class="col py-3">
+      <div class="container">
+          <h5 class="text-muted">Current Balance</h5>
+          <h3 id="balance"></h3>
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex">
+            <i class="fas fa-wallet fa-2x"></i>
+            <h5 id="watchListText" class="text-info ml-2 mt-1">Assets Portfolio</h5>
+            <div class="ml-auto mt-2 d-flex">
+              <i class="fas fa-coins fa-2x mr-2"></i>
+              <h4 id="coinCounter" class="text-info"></h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="col-6">
+              <h6 class="text-muted">Current Balance</h6>
+              <h1 id="balance"></h1>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>24H</th>
+                  <th>Holdings</th>
+                </tr>
+              </thead>
+              <tbody id="portBody"></tbody>
+            </table>
+          </div>
+          <button
+            data-toggle="modal"
+            data-target="#portfolioModal"
+            class="btn btn-primary"
+            href="#"
+          >
+            <i class="mr-1 fas fa-plus-circle"></i>Add Currency
+          </button>
+          <div class="overflow-scroll card-body" id="cryptoContainer">
+            <div id="row" class="row"></div>
+          </div>
+        </div>
+      </div>
+      <!-- LeaderBoard Modal -->
+      <div class="w-100 mr-2" id="portfolioModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div id="porModal" class="modal-content">
+            <div id="" class="modal-header">
+              <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div id="" class="modal-body">
+              <!-- SEARCH INPUT -->
+              <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                  <div class="input-group mb-3 w-50 shadow">
+                    <input
+                      id="searchBox"
+                      class="form-control"
+                      type="text"
+                      placeholder="Currency"
+                    />
+                    <div class="input-group-append">
+                      <span class="input-group-text bg-primary text-white"
+                        ><i class="fas fa-search-dollar"></i
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3"></div>
+                <!-- SEARCH BOX -->
+                <div id="zIndexSearch" class="col">
+                  <table id="tableNone" class="d-none border table-hover">
+                    <tbody
+                      id="searchBoxContainer"
+                      class="position-absolute"
+                    ></tbody>
+                  </table>
+                </div>
+              </div>
+              <div id="portfolioC"></div>
+            </div>
+            <div class="modal-footer">
+              <button
+                id="closeModal"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHART.JS CDN -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"
+      integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- SCRIPTS -->
+    <!-- <script src="../scripts/shared/shared.js"></script>
+    <script src="../scripts/charts.js"></script>
+    <script src="../scripts/localStorage.js"></script>
+    <script src="../scripts/domUi.js"></script>
+    <script src="../scripts/apiData.js"></script>
+    <script src="../scripts/helperFunc.js"></script>
+    <script src="/scripts/watchList/application.js"></script> -->
+    <script src="../scripts/portfolio/portfolio.js"></script>
+    <script src="../scripts/shared/shared.js"></script>
+    <script src="../scripts/charts.js"></script>
+    <script src="../scripts/localStorage.js"></script>
+    <script src="../scripts/domUi.js"></script>
+    <script src="../scripts/apiData.js"></script>
+    <script src="../scripts/helperFunc.js"></script>
+    <script src="../scripts/portfolio/application.js"></script>
+    <!-- CDNS -->
+    <script
+      src="https://kit.fontawesome.com/29d490a53c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@1.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair@1"></script>
+  </body>
+</html>
