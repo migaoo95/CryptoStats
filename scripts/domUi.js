@@ -15,6 +15,9 @@ class DomUI {
     this.globalData = document.getElementById("globalDataDiv");
     this.searchBoxContainer = document.getElementById("searchBoxContainer");
     this.portfolioContainer = document.getElementById("portfolioC");
+    this.portBody = document.getElementById("portBody");
+    this.balance = document.getElementById("balance");
+    // this.totalSpent = document.getElementById("totalAmount");
   }
   // Update leaderboard
   refresh() {
@@ -374,59 +377,105 @@ class DomUI {
     this.searchBoxContainer.innerHTML = "";
   }
   // Create Portfolio ----------------------------- { Portfolio }
-  displayPortfolio(coin) {
+  displayPortfolio(coin, className, quantity) {
+    // console.log(coin.image);
     this.portfolioContainer.innerHTML = `
-    <div class="row">
-    <div class="col-12 d-flex justify-content-center mb-2">
-    <div class="btn-toolbar">
-    <div id="btn-group" class="btn-group mr-auto">
-        <button class="btn px-5" type="button"><span class="h6">Buy<span></button>
-        <button class="btn px-5" type="button"><span class="h6">Sell<span></button>
-    </div>
-    </div>
-    </div>
-    <br>
-    <div class="col-6 offset-4 pl-4 mt-3">
-    
-    <div class="d-flex">
-    <img id="d-image" class="img-fluid" src="${coin.image.small}">
-    <h5 class="pt-2 ml-2">${coinCapitalized(coin.id)}</h5>
-    <div class="position-relative mt-2">
-    <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
-    
+      <div class="row">
+      <div class="col-12 d-flex justify-content-center mb-2">
+      <div class="btn-toolbar">
+      <div id="btn-group" class=" btn-group mr-auto">
+          <button id="buyBuy" data-toggle="button" class="buy btn btn-info text-dark active px-5" type="button"><span class="${className} h6">Buy<span></button>
+          <button id="buySell" data-toggle="button" class="buy btn btn-info text-dark px-5" type="button"><span class="${className} h6">Sell<span></button>
       </div>
-     </div>
-     </div>
-     </div>
-    <div class="row container d-flex justify-content-center mt-3">
-    <div class="col-5 pr-1">
-    <div class="form-group">
-    <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="" aria-describedby="quantity" placeholder="0.00">
-    <small id="emailHelp" class="form-text text-muted">What is the amount of coins that you would like to add</small>
-  </div>
+      </div>
+      </div>
+      <br>
+      <div class="col-6 offset-4 pl-4 mt-3">
+      
+      <div class="d-flex">
+      
+      <img id="d-image" class="img-fluid" src="${
+        className == "buy" ? coin.image.small : ""
+      }">
+      <h5 id="coinName" class="pt-2 ml-2">${coinCapitalized(coin.id)}</h5>
+      
+      <div class="position-relative mt-2">
+      <span class="ml-2 text-muted position-relative p-1 bg-light">${coin.symbol.toUpperCase()}</span>
+      
+        </div>
+       </div>
+       </div>
+       </div>
+      <div class="row container d-flex justify-content-center mt-3">
+      <div class="col-5 pr-1">
+      <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="quantity form-control" id="quantity" min="0" aria-describedby="quantity" placeholder="0.00">
+      <small id="emailHelp" class="form-text text-muted">What is the amount of coins that you would like to add</small>
     </div>
-
-
-    <div class="col-5 pl-1">
-  <div class="form-group">
-    <label for="quantity">Price Per Coin</label>
-    <input type="number" class="form-control" id="" aria-describedby="quantity" placeholder="0.00" value="${
-      coin.market_data.current_price.usd
-    }">
-    <small id="emailHelp" class="form-text text-muted">Current price per token</small>
-  </div>
-    </div>
-    
-    <div class="container mt-3 px-5">
-    <div id="totalSpent" class=" p-3 mb-3 rounded">
-    <h6 class="text-muted">Total Spent</h6>
+      </div>
   
-    <h4>$0</h4>
+  
+      <div class="col-5 pl-1">
+    <div class="form-group">
+      <label for="quantity">Price Per Coin</label>
+      <input type="number" class="form-control" id="price" aria-describedby="quantity" placeholder="0.00"  value="${
+        coin.market_data.current_price.usd
+      }">
+      <small id="emailHelp" class="form-text text-muted">Current price per token</small>
     </div>
-    <button class="btn btn-block btn-primary py-2">Add Transaction</button>
-    </div>
-    </div>
+      </div>
+      
+      <div class="container mt-3 px-5">
+      <div id="totalSpent" class=" p-3 mb-3 rounded">
+      <h6 class="text-muted">Total Spent</h6>
+    
+      <h4>$<span id="totalAmount">0</span></h4>
+      </div>
+      <button class="addTrans btn btn-block btn-primary py-2">Add Transaction</button>
+      </div>
+      </div>
+      `;
+  }
+
+  // -------------------------------- { Portfolio } -----------------------------------
+  // Balance
+  displayBalance(amount) {
+    this.balance.innerHTML = `$${amount}`;
+  }
+  // Name
+  changeTotalSpent(total) {
+    // this.totalSpent.textContent = total;
+    document.getElementById("totalAmount").textContent = total;
+    // console.log(this.totalSpent, total);
+  }
+  displayAssets(crypto, quantity, index) {
+    // console.log(holdings);
+    console.log(crypto);
+    this.portBody.innerHTML += `
+    <tr class="" data-toggle="modal"
+    data-target="#leaderModal">
+  
+    <td id="tableData"><span class="h6 mr-3">${
+      index + 1
+    }</span><img style="width:30px"  class="img-fluid rounded-circle mr-2"  src="${
+      crypto.image.thumb
+    }"><span>${
+      crypto.id
+    } </span><span class="text-muted">${crypto.symbol.toUpperCase()}</span></td>
+    <td>$${crypto.market_data.current_price.usd}</td>
+    <td id="tableData"><span id="spanPro" class="${
+      crypto.market_data.price_change_percentage_24h >= 0
+        ? "text-success"
+        : "text-danger"
+    }">${
+      Math.round(crypto.market_data.price_change_percentage_24h * 100) / 100
+    }%</span></td>
+   
+    <td>$${
+      crypto.market_data.current_price.usd * quantity
+    } <br><small class="text-muted">${crypto.symbol.toUpperCase()} ${quantity}</small></td>
+    </tr>
     `;
   }
 }

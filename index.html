@@ -14,75 +14,46 @@
 
     <title>Crypto Stats</title>
   </head>
+  <header>
+    <div class="container">
+      <nav
+        id="navigation"
+        class="navbar navbar-expand-lg navbar-light bg-light mb-2 shadow-sm"
+      >
+        <!-- <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+
+        <div class="navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav m-auto">
+            <li class="nav-item d-flex mr-5">
+              <i class="text-info fa fa-tachometer fa-2x"></i>
+              <a class="nav-link h6 text-info" href="index.html"
+                >Dashboard <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item d-flex mr-5">
+              <i class="text-muted far fa-star fa-2x"></i>
+              <a class="nav-link h6" href="../pages/watchlist.html"
+                >Watchlist</a
+              >
+            </li>
+
+            <li class="nav-item d-flex">
+              <i class="text-muted fas fa-wallet fa-2x"></i>
+              <a class="nav-link h6" href="../pages/portfolio.html"
+                >Portfolio</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
   <body>
     <div class="container-fluid">
       <div class="row flex-nowrap">
-        <div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark shadow-lg">
-          <div
-            style="height: 100vh"
-            class="
-              d-flex
-              flex-column
-              align-items-center align-items-sm-start
-              px-3
-              pt-2
-              text-white
-              min-vh-100
-            "
-          >
-            <a
-              href="/"
-              class="
-                d-flex
-                align-items-center
-                pb-3
-                mb-md-0
-                me-md-auto
-                text-white text-decoration-none
-              "
-            >
-              <span class="fs-5 d-sm-inline">Crypto Stats</span>
-            </a>
-            <ul
-              class="
-                nav nav-pills
-                flex-column
-                mb-sm-auto mb-0
-                align-items-center align-items-sm-start
-              "
-              id="menu"
-            >
-              <li class="nav-item">
-                <a
-                  href="index.html"
-                  class="text-white nav-link align-middle px-1"
-                >
-                  <i class="fa fa-tachometer fa-2x pr-2"></i>
-                  <span class="ms-1 d-sm-inline">Dashboard</span>
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="pages/watchlist.html"
-                  class="text-white nav-link px-0 align-middle"
-                >
-                  <i class="far fa-star fa-2x"></i>
-                  <span class="ms-1 d-none d-sm-inline">Watchlist</span></a
-                >
-              </li>
-              <li>
-                <a
-                  href="pages/portfolio.html"
-                  class="text-white nav-link px-0 align-middle"
-                >
-                  <i class="fas fa-wallet fa-2x ml-1"></i>
-                  <span class="ms-1 d-none d-sm-inline">Portfolio</span></a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
         <!-- Main Container -->
         <div id="body" class="col py-3">
           <!-- GAINERS -->
@@ -223,7 +194,6 @@
                 </div>
               </div>
               <div class="col-3"></div>
-              <!-- SEARCH BOX -->
               <div id="zIndexSearch" class="col">
                 <table id="tableNone" class="d-none border table-hover">
                   <tbody
