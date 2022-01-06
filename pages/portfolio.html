@@ -102,7 +102,7 @@
         </div>
       </div>
       <!-- LeaderBoard Modal -->
-      <div class="w-100 mr-2" id="portfolioModal">
+      <div class="modal w-100 mr-2" id="portfolioModal">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div id="porModal" class="modal-content">
             <div id="" class="modal-header">
@@ -154,7 +154,17 @@
         </div>
       </div>
     </div>
-
+<script>
+    function clickBtnOne(){
+        document.getElementById('buyBuy').classList.add('enable');
+        document.getElementById('buySell').classList.remove('enable');
+    }
+    function clickBtnTwo(){
+        document.getElementById('buyBuy').classList.remove('enable');
+        document.getElementById('buySell').classList.add('enable');
+    }
+  
+</script>
     <!-- CHART.JS CDN -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"

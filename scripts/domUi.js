@@ -384,8 +384,8 @@ class DomUI {
       <div class="col-12 d-flex justify-content-center mb-2">
       <div class="btn-toolbar">
       <div id="btn-group" class=" btn-group mr-auto">
-          <button id="buyBuy" data-toggle="button" class="buy btn btn-info text-dark active px-5" type="button"><span class="${className} h6">Buy<span></button>
-          <button id="buySell" data-toggle="button" class="buy btn btn-info text-dark px-5" type="button"><span class="${className} h6">Sell<span></button>
+          <button onclick="clickBtnOne()" id="buyBuy" onClick data-toggle="button" class="buy btn btn-info text-dark active px-5" type="button"><span class="${className} h6">Buy<span></button>
+          <button onclick="clickBtnTwo()" id="buySell" data-toggle="button" class="buy btn btn-info text-dark px-5" type="button"><span class="${className} h6">Sell<span></button>
       </div>
       </div>
       </div>
