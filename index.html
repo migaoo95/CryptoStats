@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/styleRes.css" />
 
     <title>Crypto Stats</title>
   </head>
@@ -18,33 +19,32 @@
     <div class="container">
       <nav
         id="navigation"
-        class="navbar navbar-expand-lg navbar-light bg-light mb-2 shadow-sm"
+        class="navbar navbar-expand navbar-light bg-light mb-2 shadow-sm w-100"
       >
         <!-- <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> -->
 
-        <div class="navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav m-auto">
-            <li class="nav-item d-flex mr-5">
-              <i class="text-info fa fa-tachometer fa-2x"></i>
+        <div
+          class="navbar-collapse d-flex justify-content-around"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav w-100 d-flex justify-content-around">
+            <li class="nav-item d-flex">
+              <i class="d-none d-md-block text-info fa fa-tachometer fa-2x"></i>
               <a class="nav-link h6 text-info" href="index.html"
                 >Dashboard <span class="sr-only">(current)</span></a
               >
             </li>
-            <li class="nav-item d-flex mr-5">
-              <i class="text-muted far fa-star fa-2x"></i>
-              <a class="nav-link h6" href="../pages/watchlist.html"
-                >Watchlist</a
-              >
+            <li class="nav-item d-flex">
+              <i class="d-none d-md-block text-muted far fa-star fa-2x"></i>
+              <a class="nav-link h6" href="./pages/watchlist.html">Watchlist</a>
             </li>
 
             <li class="nav-item d-flex">
-              <i class="text-muted fas fa-wallet fa-2x"></i>
-              <a class="nav-link h6" href="../pages/portfolio.html"
-                >Portfolio</a
-              >
+              <i class="d-none d-md-block text-muted fas fa-wallet fa-2x"></i>
+              <a class="nav-link h6" href="./pages/portfolio.html">Portfolio</a>
             </li>
           </ul>
         </div>
@@ -60,20 +60,10 @@
           <div class="container">
             <div
               id="globalDataDiv"
-              class="
-                shadow-sm
-                col-12
-                d-flex
-                bg-light
-                border
-                justify-content-around
-                pt-1
-                mb-3
-                rounded
-              "
+              class="text-center shadow-sm col-12 d-flex bg-light border justify-content-around pt-1 mb-3 rounded"
             ></div>
             <div class="row mb-4">
-              <div class="col-6">
+              <div class="col-md-6 col-sm-12 mb-4 mb-md-0">
                 <div class="card shadow">
                   <div class="d-flex align-items-center card-header">
                     <i
@@ -103,7 +93,7 @@
               </div>
 
               <!-- LOOSERS -->
-              <div class="col-6">
+              <div class="col-md-6 col-sm-12">
                 <div class="card shadow">
                   <div class="d-flex align-items-center card-header">
                     <i

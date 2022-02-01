@@ -23,22 +23,27 @@
   text-decoration: none;
 }
 .modal {
-  position: absolute;
-  top: 10px;
+  /* position: absolute; */
+  /* top: 10px; */
   /* right: 50px; */
-  bottom: 0;
-  left: 0;
+  /* bottom: 0;
+  left: 0; */
   z-index: 10040;
   /* width: 1500px !important; */
   overflow: auto;
   overflow-y: auto;
 }
+.watchList {
+  overflow: visible !important;
+  overflow-y: visible !important;
+}
 #leaderModal {
-  position: absolute;
-  top: 10px;
+  /* position: absolute;
+  
+  top: 10px; */
   /* right: 50px; */
-  bottom: 0;
-  left: 0;
+  /* bottom: 0;
+  left: 0; */
   z-index: 10040;
   /* width: 1500px !important; */
   /* overflow: auto;
@@ -49,8 +54,10 @@
 }
 /* here fix  */
 .modal-body {
-  max-height: 80vh;
-  overflow: visible;
+  /* max-height: 80vh; */
+  overflow: auto;
+  overflow-y: auto;
+  overflow: auto;
 }
 /* #leaderModal .modal-body {
   max-height: 50vh;

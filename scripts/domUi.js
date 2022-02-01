@@ -44,7 +44,7 @@ class DomUI {
   createLeaderBoard(currency, index) {
     // DOM Output -------- { Output }
     this.leaderBoard.innerHTML += `
-    <div id="leaderCard" class="col-lg-3 col-md-6 mb-5" >
+    <div id="leaderCard" class="col-md-3 col-sm-4 mb-5 col-6" >
     <div class="card shadow-sm cardDiv">
    <div class="d-flex justify-content-between position-absolute w-100">
     <h6 class="h6 m-1 p-1">${currency.market_cap_rank}</h6>
@@ -213,7 +213,7 @@ class DomUI {
     this.leaderModalBody.innerHTML = `
   <div class="row">
     <div class="col-6 px-5">
-    <div class="mb-3 ">
+    <div class="mb-3">
     <span class="bg-dark p-1 rounded text-white">Rank #${
       coin.market_cap_rank
     }</span></div>
@@ -346,13 +346,13 @@ class DomUI {
   displayGlobalData(data) {
     console.log("Dom Global", data);
     this.globalData.innerHTML = `
-    <h6><i class="fas fa-coins"></i> Currencies: <span class="text-info">${
+    <h6 class=""><i class="d-none d-md-inline fas fa-coins"></i> Currencies<span class="d-none d-md-inline">:</span> <span class="text-info">${
       data.data.active_cryptocurrencies
     }</span></h6>
-    <h6><i class="fas fa-poll"></i> Total Market Cap: <span class="text-info">$${Math.round(
+    <h6><i class="d-none d-md-inline fas fa-poll"></i> <span class="d-none d-md-inline">Total</span> Market Cap<span class="d-none d-md-inline">:</span> <span class="text-info">$${Math.round(
       data.data.total_market_cap.usd
     )}</span></h6>
-    <h6><i class="fas fa-cubes"></i> Exchanges: <span class="text-info">${
+    <h6><i class="d-none d-md-inline fas fa-cubes"></i> Exchanges<span class="d-none d-md-inline">:</span> <span class="text-info">${
       data.data.markets
     }</span></h6>
     

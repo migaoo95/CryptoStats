@@ -19,29 +19,32 @@
     <div class="container">
       <nav
         id="navigation"
-        class="navbar navbar-expand-lg navbar-light bg-light mb-2 shadow-sm"
+        class="navbar navbar-expand navbar-light bg-light mb-2 shadow-sm w-100"
       >
         <!-- <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
 
-        <div class="navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav m-auto">
-            <li class="nav-item d-flex mr-5">
-              <i class="text-primary fa fa-tachometer fa-2x"></i>
-              <a class="nav-link text-primary" href="../index.html"
+        <div
+          class="navbar-collapse d-flex justify-content-around"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav w-100 d-flex justify-content-around">
+            <li class="nav-item d-flex">
+              <i class="d-none d-md-block text-info fa fa-tachometer fa-2x"></i>
+              <a class="nav-link h6 text-info" href="../index.html"
                 >Dashboard <span class="sr-only">(current)</span></a
               >
             </li>
-            <li class="nav-item d-flex mr-5">
-              <i class="text-muted far fa-star fa-2x"></i>
-              <a class="nav-link" href="watchlist.html">Watchlist</a>
+            <li class="nav-item d-flex">
+              <i class="d-none d-md-block text-muted far fa-star fa-2x"></i>
+              <a class="nav-link h6" href="watchlist.html">Watchlist</a>
             </li>
 
             <li class="nav-item d-flex">
-              <i class="text-muted fas fa-wallet fa-2x"></i>
-              <a class="nav-link" href="portfolio.html">Portfolio</a>
+              <i class="d-none d-md-block text-muted fas fa-wallet fa-2x"></i>
+              <a class="nav-link h6" href="portfolio.html">Portfolio</a>
             </li>
           </ul>
         </div>
@@ -72,7 +75,7 @@
           </div>
         </div>
         <!-- LeaderBoard Modal -->
-        <div class="modal mr-2" id="leaderModal">
+        <div class="modal mr-2 watchList" id="leaderModal">
           <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div id="lModalHeader" class="modal-header">
@@ -110,7 +113,7 @@
     <script src="../scripts/domUi.js"></script>
     <script src="../scripts/apiData.js"></script>
     <script src="../scripts/helperFunc.js"></script>
-    <script src="/scripts/watchList/application.js"></script>
+    <script src="../scripts/watchList/application.js"></script>
 
     <!-- <script src="scripts/charts.js"></script>
     <script src="scripts/localStorage.js"></script>

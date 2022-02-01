@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,wDAAwD",
+    "sources": [
+        "styleRes.scss"
+    ],
+    "names": [],
+    "file": "styleRes.css"
+}
