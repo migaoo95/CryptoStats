@@ -4,6 +4,7 @@ const domUi = new DomUI();
 const storage = new Store();
 const charts = new Charts();
 function showWatchlistTokens() {
+  document.getElementById("spinner-watchlist").style.display = "block";
   // Get LocalStorage Data in lowerCases ---------------------------- { Get LS Data }
   let storedCurrencies = storage
     .getStoredData()
@@ -59,6 +60,9 @@ function showWatchlistTokens() {
         // console.log("canvas", card.children[0].children[1].lastElementChild);
       });
       // charts.generateChartsTest(data.marketDataJsonAll);
+    })
+    .then(() => {
+      document.getElementById("spinner-watchlist").style.display = "none";
     });
 }
 // Call Function To Display all Coins

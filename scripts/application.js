@@ -3,7 +3,8 @@ const marketApi = new ApiData();
 const domUi = new DomUI();
 const storage = new Store();
 const charts = new Charts();
-
+// Spinner
+let spinner = true;
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }
 document.querySelector(".row").addEventListener("click", (e) => {
   modalShared(e);
@@ -39,11 +40,14 @@ marketApi
   })
   .then((data) => {
     // console.log(data.marketDataJson);
+    spinner = false;
+    hideSpinner();
     charts.generateCharts(data.marketDataJson);
   });
 
 // Change amount of coins displaied within Leaderboard -------------------------- { Change LeaderBoard }
 document.getElementById("ranking").addEventListener("change", (e) => {
+  document.querySelector(".spinner-leader").style.display = "block";
   marketApi.changeRanking(e.target.value);
   domUi.refresh();
   marketApi
@@ -57,6 +61,9 @@ document.getElementById("ranking").addEventListener("change", (e) => {
     })
     .then((data) => {
       charts.generateCharts(data.marketDataJson);
+    })
+    .then(() => {
+      document.querySelector(".spinner-leader").style.display = "none";
     });
 });
 // Watchlist event for LeaderBoard -------------------------- { WatchList LeaderBoard }
@@ -68,6 +75,7 @@ document.getElementById("row").addEventListener("click", (e) => {
 // MODAL  ------------------------------- { Event Modal }
 document.querySelectorAll("#linkMore").forEach((link) => {
   link.addEventListener("click", (e) => {
+    document.getElementById("spinner-modal").style.display = "block";
     let headers;
     if (e.target.classList.contains("lLink")) {
       headers = true;
@@ -76,21 +84,26 @@ document.querySelectorAll("#linkMore").forEach((link) => {
     }
     domUi.refreshModal();
     domUi.changeHeader(headers);
-    marketApi.getData().then((data) => {
-      if (e.target.classList.contains("lLink")) {
-        const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 50);
-        slicedArray.forEach((coin, index) => {
-          if (coin.price_change_percentage_24h < 0) {
-            domUi.displayInModal(coin, index, false, true);
-          }
-        });
-      } else {
-        const slicedArray = sortDataGrow(data.marketDataJsonAll).slice(0, 50);
-        slicedArray.forEach((coin, index) => {
-          domUi.displayInModal(coin, index, true, false);
-        });
-      }
-    });
+    marketApi
+      .getData()
+      .then((data) => {
+        if (e.target.classList.contains("lLink")) {
+          const slicedArray = sortDataLow(data.marketDataJsonAll).slice(0, 50);
+          slicedArray.forEach((coin, index) => {
+            if (coin.price_change_percentage_24h < 0) {
+              domUi.displayInModal(coin, index, false, true);
+            }
+          });
+        } else {
+          const slicedArray = sortDataGrow(data.marketDataJsonAll).slice(0, 50);
+          slicedArray.forEach((coin, index) => {
+            domUi.displayInModal(coin, index, true, false);
+          });
+        }
+      })
+      .then(() => {
+        document.getElementById("spinner-modal").style.display = "none";
+      });
   });
 });
 
@@ -243,3 +256,15 @@ document.getElementById("tableNone").addEventListener("click", (e) => {
   });
   // console.log(e.target);
 });
+// Show and hide spinners ------------------ { Spinner }
+function hideSpinner() {
+  if (spinner) {
+    document.querySelectorAll(".spinner-el").forEach((el) => {
+      el.style.display = "block";
+    });
+  } else {
+    document.querySelectorAll(".spinner-el").forEach((el) => {
+      el.style.display = "none";
+    });
+  }
+}
