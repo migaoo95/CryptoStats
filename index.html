@@ -167,9 +167,9 @@
             </div>
           </div>
           <div class="container">
-            <div class="row">
-              <div class="col-12 d-flex justify-content-center">
-                <div class="input-group mb-3 w-50 shadow">
+            <!-- <div class="row">
+              <div class="col-12 d-flex justify-content-center"> -->
+                <!-- <div class="input-group mb-3 w-50 shadow">
                   <input
                     id="searchBox"
                     class="form-control"
@@ -191,11 +191,11 @@
                     class="position-absolute"
                   ></tbody>
                 </table>
-              </div>
-            </div>
-          </div>
-          <!-- SEARCH BOX -->
-          <!-- <div class="row">
+              </div> -->
+              <!-- </div>
+            </div> -->
+            <!-- SEARCH BOX -->
+            <!-- <div class="row">
                    <div class="col-12 d-flex justify-content-center">
                    <div class="input-group mb-3 w-50 shadow">
                     <input id="searchBox" class="form-control" type="text" placeholder="Currency" />
@@ -205,16 +205,42 @@
                   </div>
                 </div>
                 -->
-          <!-- CRYPTO CURRENCY LEADERBOARD -->
-          <div class="container">
-            <div id="mainContainer" class="card shadow">
-              <div class="row">
-                <div class="col text-center">
-                  <div class="info-header mb-5">
-                    <div class="card-header">
-                      <h1 class="text-primary pb-3">
-                        Crypto Currency Leaderboard
-                      </h1>
+            <!-- CRYPTO CURRENCY LEADERBOARD -->
+            <div class="container">
+              <div id="mainContainer" class="card shadow">
+                <div class="row">
+                  <div class="col text-center">
+                    <div class="info-header mb-5">
+                      <div class="card-header">
+                        <!-- CARD HEADER ------------------------------>
+                        <div class="d-flex align-items-start justify-content-around">
+                        <h3 class="text-primary pb-3">
+                          Crypto Currency Leaderboard
+                        </h3>
+                        <div class="input-group mb-3 w-50 shadow">
+                          <input
+                            id="searchBox"
+                            class="form-control"
+                            type="text"
+                            placeholder="Search Cryptocurrencies"
+                          />
+                          <div class="input-group-append">
+                            <span class="input-group-text bg-primary text-white"
+                              ><i class="fas fa-search-dollar"></i
+                            ></span>
+                          </div>
+                        </div>
+                        <!-- CARD HEADER ------------------------------>
+                      </div>
+                      <div class="col-3"></div>
+                      <div id="zIndexSearch" class="col">
+                        <table id="tableNone" class="d-none border table-hover">
+                          <tbody
+                            id="searchBoxContainer"
+                            class="position-absolute leader_search_list"
+                          ></tbody>
+                        </table>
+                      </div>
                       <p class="lead">
                         Latest information about Top
                         <select class="" name="" id="ranking">

@@ -108,7 +108,7 @@
 #searchBoxContainer {
   max-height: 20vh;
   overflow: auto;
-  width: 58% !important;
+  width: 50% !important;
   margin-top: -16px;
   border-radius: 0px 0px 10px 10px;
   cursor: pointer;
@@ -149,4 +149,9 @@
   background-color: rgb(77, 77, 77) !important
   ;
   color: white !important;
+}
+/* New Styles  */
+.leader_search_list {
+  right: 3%;
+  width: 5px !important;
 }
