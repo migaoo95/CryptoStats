@@ -44,7 +44,7 @@ class DomUI {
   createLeaderBoard(currency, index) {
     // DOM Output -------- { Output }
     this.leaderBoard.innerHTML += `
-    <div id="leaderCard" class="col-md-3 col-sm-4 mb-5 col-12" >
+    <div id="leaderCard" class="col-md-3 col-sm-4 mb-5 col-6" >
     <div class="card shadow-sm cardDiv">
    <div class="d-flex justify-content-between position-absolute w-100">
     <h6 class="h6 m-1 p-1">${currency.market_cap_rank}</h6>
