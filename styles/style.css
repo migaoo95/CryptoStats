@@ -108,7 +108,7 @@
 #searchBoxContainer {
   max-height: 20vh;
   overflow: auto;
-  width: 48% !important;
+  width: 48%;
   margin-top: -16px;
   border-radius: 0px 0px 10px 10px;
   cursor: pointer;
@@ -128,7 +128,7 @@
   height: 700px;
   overflow: hidden !important;
 }
-#porModall {
+#porModal {
   height: 660px !important;
   overflow: hidden !important;
 }
@@ -159,4 +159,8 @@
   border: 2px solid red;
 }
 #spinner {
+}
+.search_por {
+  right: 41% !important;
+  width: 57% !important;
 }

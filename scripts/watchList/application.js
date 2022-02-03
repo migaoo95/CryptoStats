@@ -3,6 +3,7 @@ const marketApi = new ApiData();
 const domUi = new DomUI();
 const storage = new Store();
 const charts = new Charts();
+
 function showWatchlistTokens() {
   document.getElementById("spinner-watchlist").style.display = "block";
   // Get LocalStorage Data in lowerCases ---------------------------- { Get LS Data }
@@ -80,3 +81,10 @@ document.getElementById("row").addEventListener("click", (e) => {
   let page = "watch";
   singleCoinWatch(e, page);
 });
+// Page Highligt
+if (window.location.pathname == "/CryptoStats/pages/watchlist.html") {
+  document.querySelectorAll(".l1").forEach((li) => {
+    li.classList.remove("text-muted");
+    li.classList.add("text-primary");
+  });
+}

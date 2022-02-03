@@ -3,6 +3,15 @@ const marketApi = new ApiData();
 const domUi = new DomUI();
 const storage = new Store();
 const charts = new Charts();
+console.log(window.location);
+// Page Current
+if (window.location.pathname == "/CryptoStats/index.html") {
+  document.querySelectorAll(".l1").forEach((li) => {
+    li.classList.remove("text-muted");
+    li.classList.add("text-primary");
+  });
+}
+
 // Spinner
 let spinner = true;
 // Modal LeaderBoard Event Trigger --------------------------------- { Leader Modal }

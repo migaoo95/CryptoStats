@@ -1,6 +1,12 @@
 const marketApi = new ApiData();
 const domUi = new DomUI();
 const storage = new Store();
+if (window.location.pathname == "/CryptoStats/pages/portfolio.html") {
+  document.querySelectorAll(".l1").forEach((li) => {
+    li.classList.remove("text-muted");
+    li.classList.add("text-primary");
+  });
+}
 // const portfolio = new Portfolio();
 let coinArr = [];
 // Get Data for SearchBar ------------------- { Search Bar }
