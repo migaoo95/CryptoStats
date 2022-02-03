@@ -82,7 +82,7 @@ document.getElementById("row").addEventListener("click", (e) => {
   singleCoinWatch(e, page);
 });
 // Page Highligt
-if (window.location.pathname == "/CryptoStats/pages/watchlist.html") {
+if (window.location.pathname.includes("watchlist.html")) {
   document.querySelectorAll(".l1").forEach((li) => {
     li.classList.remove("text-muted");
     li.classList.add("text-primary");

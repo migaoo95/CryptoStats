@@ -5,11 +5,12 @@ const storage = new Store();
 const charts = new Charts();
 console.log(window.location);
 // Page Current
-if (window.location.pathname == "/CryptoStats/index.html") {
+if (window.location.pathname.includes("index.html")) {
   document.querySelectorAll(".l1").forEach((li) => {
     li.classList.remove("text-muted");
     li.classList.add("text-primary");
   });
+} else {
 }
 
 // Spinner
