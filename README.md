@@ -1,7 +1,7 @@
 # About CryptoStats
 CryptoStats is a cryptocurrency web-based application developed to accurately trace price movement of various cryptocurrencies and enable users to track their holdings value based of various assets which are usually spread between many currency exchanges.  
 #### DashBoard  
-- Build in order to allow users to track price movement of various cryptocurrencies. 
+- Built in order to allow users to track price movement of various cryptocurrencies. 
 #### WatchList 
 - Allows users to save their favourite currencies which are stored in LocalStorage for future price movement tracking.
 #### Portfolio 
